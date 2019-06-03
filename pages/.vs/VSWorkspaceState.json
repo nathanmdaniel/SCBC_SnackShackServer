@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ButtonAppBar",
+    "\\MainMenu",
+    "\\MainMenuItems",
+    "\\Register",
+    "\\Register\\RegisterButtonSide",
+    "\\Register\\RegisterButtonSide\\CategorizedButtons",
+    "\\Register\\RegisterTransactionSide"
+  ],
+  "SelectedNode": "\\MainMenu\\MainMenuDrawer.js",
+  "PreviewInSolutionExplorer": false
+}
