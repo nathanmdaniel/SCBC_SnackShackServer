@@ -29,7 +29,7 @@ class ClothingButtons extends React.Component {
 				style={{backgroundColor:"#8d6e63", color: '#faebd7', fontWeight: 'bold'}}
 				variant='contained'
 				size='large'
-				onClick={this.props.addChip}
+				onClick={this.props.addChip.bind(this, "Blue Shirt", 10.00)}
 				> Clothing</Button>);
 		return arr;
 	}

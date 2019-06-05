@@ -27,8 +27,8 @@ import Grid from '@material-ui/core/Grid';
 			        style={{backgroundColor: "#26a69a", color: '#faebd7'}}
                     variant='contained'
                     size='large'
-                    onClick={this.props.addChip}
-                    > Clothing</Button>);
+                    onClick={this.props.addChip.bind(this, "Dr. Pepper", 1.50)}
+                    > Drink</Button>);
             return arr;
         }
 

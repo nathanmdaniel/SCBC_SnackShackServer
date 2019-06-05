@@ -25,26 +25,48 @@ function handleChipClick() {
     console.log("chip clicked");
 }
 
+function genChipLabel(itemName, price) {
+    return itemName + "  $" + price;
+}
 
 class Register extends React.Component {
     state = {
         chips: [],
+        prices: [],
+        total: 0,
     };
 
-    handleButtonClick() {
+    handleButtonClick(itemName, price) {
         this.state.chips.push(
         <Chip
-            label='Blue Shirt          $10.00'
+            label={genChipLabel(itemName, price)}
 			onClick={handleChipClick}
-        style={{color: '#283593', width: '100%', fontWeight: 'bold', margin: 1}}
-        />
-        );
+            style={{color: '#283593', width: '100%', fontWeight: 'bold', margin: 1}}
+        />);
+        this.state.prices.push(price);
+        this.state.total = this.state.total + price;
+        this.forceUpdate();
+    }
+
+    handleRemoveClick() {
+
+        this.state.chips.pop();
+        this.state.total -= this.state.prices.pop();
+        this.forceUpdate();
+    }
+
+    handleSendClick() {
+        this.state.chips = [];
+        this.state.prices = [];
+        this.state.total = 0;
         this.forceUpdate();
     }
 
     constructor() {
         super();
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
+        this.handleSendClick = this.handleSendClick.bind(this);
     }
 
     render() {
@@ -57,7 +79,12 @@ class Register extends React.Component {
                     <RegisterButtonContainer addChip={this.handleButtonClick}/>
               </Grid>
               <Grid item xs={9} sm={4}>
-                <TransactionCard chips={this.state.chips}> 
+                <TransactionCard 
+                  chips={this.state.chips} 
+                  removeClick={this.handleRemoveClick}
+                  sendClick={this.handleSendClick}
+                  transactionTotal={this.state.total}
+                  > 
                 </TransactionCard>
               </Grid>
             </Grid>

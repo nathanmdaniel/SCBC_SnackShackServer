@@ -4,6 +4,18 @@ const dev = process.env.NODE_ENV !== 'production'
 // Create the Express-Next App
 const app = next({ dev })
 const handle = app.getRequestHandler()
+
+if(typeof require !== 'undefined') XLSX = require('xlsx');
+var workbook = XLSX.readFile('./SampleInventory.xlsx');
+//console.log(workbook);
+var worksheet = workbook.Sheets['Merchandise'];
+console.log(worksheet);
+
+//var path = require('./SampleInventory.xlsx');
+//console.log(path);
+//var workbook = XLSX.readFile('./SampleInventory.xlsx');
+//console.log(workbook);
+
 //Start the app
 app.prepare()
 //Start Express server and serve the 

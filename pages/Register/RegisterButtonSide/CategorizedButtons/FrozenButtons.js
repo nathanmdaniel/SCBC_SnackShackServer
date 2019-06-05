@@ -26,8 +26,8 @@ import Grid from '@material-ui/core/Grid';
 			style={{backgroundColor: "#42a5f5", color: '#faebd7'}}
     variant='contained'
     size='large'
-    onClick={this.props.addChip}
-    > Clothing</Button>);
+    onClick={this.props.addChip.bind(this, "Flav-or-Ice", 0.75)}
+    > Frozen</Button>);
     return arr;
     }
 
