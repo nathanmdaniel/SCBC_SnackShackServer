@@ -1,11 +1,8 @@
 import React from 'react';
-import './App.css';
 import { withStyles } from '@material-ui/core/styles';
 import ButtonAppBar from './ButtonAppBar/ButtonAppBar.js';
-import AppBar from '@material-ui/core/AppBar';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Register from './Register/Register.js';
-import Grid from '@material-ui/core/Grid';
 
 const theme = createMuiTheme({
     palette: {
@@ -18,20 +15,16 @@ const theme = createMuiTheme({
     }
 });
 
-class App extends React.Component {
+class RegisterPage extends React.Component {
     render() {
-            return (
-                <div>
-                    <MuiThemeProvider theme={theme}>
+        return (
+            <div>
+                <MuiThemeProvider theme={theme}>
                     <div>
                         <ButtonAppBar/>
                     </div>
                     <div>
-                        <Grid container spacing={10} justify='center'>
-				            <Grid item xs={12} sm={6} style={{minHeight: '250px'}}>
-                                <img width="700" height="200" src="../static/scbc_website_logo.png"/>
-                            </Grid>
-                        </Grid>
+                        <Register theme/>
                     </div>
                     </MuiThemeProvider>
                 </div>
@@ -39,4 +32,4 @@ class App extends React.Component {
                     }
 }
 
-export default App;
+export default RegisterPage;

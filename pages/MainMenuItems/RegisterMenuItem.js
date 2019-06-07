@@ -4,10 +4,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import Link from 'next/link';
 
-class AccountsMenuItem extends React.Component {
+class RegisterMenuItem extends React.Component {
 	render() {
-		return(
+	    return(
+            <Link href='/RegisterPage'>
 			<ListItem button>
 			  <ListItemIcon>
 				<SvgIcon>
@@ -16,8 +18,9 @@ class AccountsMenuItem extends React.Component {
 			  </ListItemIcon>
 			  <ListItemText primary="Register" />
 			</ListItem>
+            </Link>
 		);
 	}
 }
 
-export default AccountsMenuItem;
+export default RegisterMenuItem;
