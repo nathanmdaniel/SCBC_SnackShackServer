@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ButtonAppBar from './ButtonAppBar/ButtonAppBar.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Register from './Register/Register.js';
+import fetch from 'isomorphic-fetch';
 
 const theme = createMuiTheme({
     palette: {
@@ -16,6 +17,29 @@ const theme = createMuiTheme({
 });
 
 class RegisterPage extends React.Component {
+    constructor() {
+        super();
+        const http = require('http');
+        const XLSX = require('xlsx');
+        /*
+        var server = http.get({
+            hostname: 'localhost',
+            port: 3001,
+        }, (res) => {
+            console.log("# # # # # # res from Register" + (res));
+            var sheet = XLSX.utils.json_to_sheet(res);
+            console.log(sheet);
+        });
+        */
+        ///*
+        var server = fetch("http://localhost:3001/RegisterPage")
+            .then(function(response) {
+                console.log(response);
+            });
+         //*/
+        
+
+    }
     render() {
         return (
             <div>

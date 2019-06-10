@@ -32,7 +32,6 @@ class AccountsPage extends React.Component {
 					<Grid item sm={6} style={{minHeight: '200px'}}>
 						<Paper style={{padding:'50px'}}>
 							<NewAccountInput/>
-							<NewBalanceInput/>
 						</Paper>
 					</Grid>
 					<Grid item sm={1}/>

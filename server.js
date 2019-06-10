@@ -9,7 +9,7 @@ if(typeof require !== 'undefined') XLSX = require('xlsx');
 var workbook = XLSX.readFile('./SampleInventory.xlsx');
 //console.log(workbook);
 var worksheet = workbook.Sheets['Merchandise'];
-console.log(worksheet);
+//console.log(worksheet);
 
 //var path = require('./SampleInventory.xlsx');
 //console.log(path);
@@ -21,7 +21,19 @@ app.prepare()
 //Start Express server and serve the 
 .then(() => {
     const server = express()
+    server.get('/', (req, res) => {
+        console.log("recieved get from RegisterPage [server]")
+        console.log("****worksheet raw****")
+        console.log(worksheet)
+        const wkshtJSON = XLSX.utils.sheet_to_json(worksheet)
+        console.log("****worksheet JSON****")
+        console.log(wkshtJSON)
+        res.send(wkshtJSON)
+        res.end()
+        return res;
+    })
     server.get('*', (req, res) => {
+        console.log("in * server get")
         return handle(req, res)
     })
     server.listen(3001, (err) => {

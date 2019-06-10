@@ -5,7 +5,7 @@ class NewNameInput extends React.Component {
     render() {
         return(
             <Input
-            placeholder="Placeholder"
+            placeholder="Camper Name"
             inputProps={{'aria-label': 'Description',}}
             />
         );

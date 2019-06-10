@@ -6,6 +6,7 @@ class NewBalanceInput extends React.Component {
     render() {
         return(
             <Input
+            placeholder="0.00"
                 startAdornment={<InputAdornment position="start">$</InputAdornment>}
             />
         );

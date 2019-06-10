@@ -28,7 +28,7 @@ class App extends React.Component {
                     </div>
                     <div>
                         <Grid container spacing={10} justify='center'>
-				            <Grid item xs={12} sm={6} style={{minHeight: '250px'}}>
+				            <Grid item xs={12} sm={6} style={{minHeight: '250px', padding: '50px'}}>
                                 <img width="700" height="200" src="../static/scbc_website_logo.png"/>
                             </Grid>
                         </Grid>

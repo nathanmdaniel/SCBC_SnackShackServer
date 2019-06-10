@@ -10,7 +10,8 @@ class NewAccountInput extends React.Component {
 			    <Typography gutterBottom variant="h5" component="h2">
 				    New Account Input
 			    </Typography>
-                <NewNameInput/>
+                <NewNameInput style={{margin: '25px'}}/>
+				<NewBalanceInput/>
             </div>
 		);
     }
