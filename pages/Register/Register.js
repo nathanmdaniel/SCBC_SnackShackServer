@@ -26,7 +26,7 @@ function handleChipClick() {
 }
 
 function genChipLabel(itemName, price) {
-    return itemName + "  $" + price;
+    return itemName + "  $" + price.toFixed(2);
 }
 
 class Register extends React.Component {

@@ -9,39 +9,43 @@ class SnackButtons extends React.Component {
 
 	constructor(props) {
             super(props);
-            this.genButtons = this.genButtons.bind(this);
             this.state = {
-                buttArr: this.genButtons(),
+                buttArr: null,
             };
-        }
+	}
 
-        genButtons() {
-            const XLSX = require('xlsx');
-            //var path = require('./SampleInventory.xlsx');
-            //console.log(path);
-            //var workbook = XLSX.readFile('./SampleInventory.xlsx');
-            //console.log(workbook);
-            var arr = [];
-            for (var i = 0; i < 10; ++i)
-                arr.push(<Button
-			style={{backgroundColor: "#ec407a", color: '#faebd7'}}
-    variant='contained'
-    size='large'
-    onClick={this.props.addChip.bind(this, "Snickers", 1.00)}
-    > Snack</Button>);
-    console.log(arr);
-    return arr;
+    componentDidMount() {
+        var arr = [];
+        var data = null;
+        var url = 'http://localhost:3001/SnacksJson'
+        fetch(url).then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            data = myJson;
+            data.forEach(info =>{
+                var thisButton = <Button 
+                style={{backgroundColor: "#ec407a", color: '#faebd7', fontWeight: 'bold'}} 
+                variant='contained'
+                onClick={this.props.addChip.bind(this, info.Name, info.UnitPrice)}
+                size='large'>{info.Name}</Button>;
+        arr.push(thisButton);
+    })
+        this.setState({buttArr: arr});     
+    })
+    .catch((error) => {
+        console.error(error);
+    });
     }
 
     render() {
-        var disp = this.state.buttArr.map(button => <div style={{ padding: 5}}> {button} </div>)
-    console.log(disp);
-        return (
-			<div style={{ padding: 20 }}>
-			   <Grid container>
-				 {disp}
-			   </Grid>
-    </div>
+        var disp = this.state.buttArr ? this.state.buttArr.map(button => <div style={{ padding: 5}}> {button} </div>) : <div/>;
+    return (
+        <div style={{ padding: 20 }}>
+       <Grid container>
+         {disp}
+       </Grid>
+     </div>
 		);
     }
 }

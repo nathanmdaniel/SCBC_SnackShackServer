@@ -7,44 +7,42 @@ const handle = app.getRequestHandler()
 
 if(typeof require !== 'undefined') XLSX = require('xlsx');
 var workbook = XLSX.readFile('./SampleInventory.xlsx');
-//console.log(workbook);
-var worksheet = workbook.Sheets['Merchandise'];
-//console.log(worksheet);
 
-//var path = require('./SampleInventory.xlsx');
-//console.log(path);
-//var workbook = XLSX.readFile('./SampleInventory.xlsx');
-//console.log(workbook);
+var merchSheet = workbook.Sheets['Merchandise'];
+var snacksSheet = workbook.Sheets['Snacks'];
+var drinksSheet = workbook.Sheets['Drinks'];
+var frozenSheet = workbook.Sheets['Frozen'];
 
 //Start the app
 app.prepare()
 //Start Express server and serve the 
 .then(() => {
     const server = express()
-    server.get('/json', (req, res) => {
-        //console.log("recieved get from RegisterPage [server]")
-        //console.log("****worksheet raw****")
-        //console.log(worksheet)
-        const wkshtJSON = XLSX.utils.sheet_to_json(worksheet)
-        //console.log("****worksheet JSON****")
-        //console.log(wkshtJSON)
-        res.send(wkshtJSON)
+    server.get('/MerchJson', (req, res) => {
+        const merchJSON = XLSX.utils.sheet_to_json(merchSheet)
+        res.send(merchJSON)
         res.end()
         return res;
-    })/*
-    server.get('/', (req, res) => {
-        console.log("recieved get from RegisterPage [server]")
-        console.log("****worksheet raw****")
-        console.log(worksheet)
-        const wkshtJSON = XLSX.utils.sheet_to_json(worksheet)
-        console.log("****worksheet JSON****")
-        console.log(wkshtJSON)
-        res.send(wkshtJSON)
+    })
+    server.get('/SnacksJson', (req, res) => {
+        const snacksJSON = XLSX.utils.sheet_to_json(snacksSheet)
+        res.send(snacksJSON)
         res.end()
         return res;
-    })*/
+    })
+    server.get('/DrinksJson', (req, res) => {
+        const drinksJSON = XLSX.utils.sheet_to_json(drinksSheet)
+        res.send(drinksJSON)
+        res.end()
+        return res;
+    })
+    server.get('/FrozenJson', (req, res) => {
+        const frozenJSON = XLSX.utils.sheet_to_json(frozenSheet)
+        res.send(frozenJSON)
+        res.end()
+        return res;
+    })
     server.get('*', (req, res) => {
-        console.log("in * server get")
         return handle(req, res)
     })
     server.listen(3001, (err) => {
