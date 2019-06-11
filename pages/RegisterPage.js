@@ -31,12 +31,7 @@ class RegisterPage extends React.Component {
             console.log(sheet);
         });
         */
-        ///*
-        var server = fetch("http://localhost:3001/RegisterPage")
-            .then(function(response) {
-                console.log(response);
-            });
-         //*/
+        
         
 
     }

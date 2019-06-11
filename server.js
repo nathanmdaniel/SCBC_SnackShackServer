@@ -21,6 +21,17 @@ app.prepare()
 //Start Express server and serve the 
 .then(() => {
     const server = express()
+    server.get('/json', (req, res) => {
+        //console.log("recieved get from RegisterPage [server]")
+        //console.log("****worksheet raw****")
+        //console.log(worksheet)
+        const wkshtJSON = XLSX.utils.sheet_to_json(worksheet)
+        //console.log("****worksheet JSON****")
+        //console.log(wkshtJSON)
+        res.send(wkshtJSON)
+        res.end()
+        return res;
+    })/*
     server.get('/', (req, res) => {
         console.log("recieved get from RegisterPage [server]")
         console.log("****worksheet raw****")
@@ -31,7 +42,7 @@ app.prepare()
         res.send(wkshtJSON)
         res.end()
         return res;
-    })
+    })*/
     server.get('*', (req, res) => {
         console.log("in * server get")
         return handle(req, res)

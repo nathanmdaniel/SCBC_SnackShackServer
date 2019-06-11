@@ -9,8 +9,14 @@ import FrozenButtons from './CategorizedButtons/FrozenButtons.js';
 class ButtonLoader extends React.Component {
     constructor(props) {
         super(props);
+        this.updateButtons=this.updateButtons.bind(this);
     }
 
+
+    updateButtons() {
+        console.log("updated");
+        this.forceUpdate();
+    }
     //Maybe put function call in curly braces.
 
     render() {
@@ -18,7 +24,7 @@ class ButtonLoader extends React.Component {
             case 0:
                 return (
                     <div>
-                        <ClothingButtons addChip={this.props.addChip}/>
+                        <ClothingButtons update={this.updateButtons} addChip={this.props.addChip}/>
                     </div>
                 );
             case 1:
@@ -46,8 +52,8 @@ class ButtonLoader extends React.Component {
 }
 
     
-    ButtonLoader.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
+//    ButtonLoader.propTypes = {
+//    classes: PropTypes.object.isRequired,
+//};
 
 export default ButtonLoader;

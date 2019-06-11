@@ -29,14 +29,17 @@ class SnackButtons extends React.Component {
     size='large'
     onClick={this.props.addChip.bind(this, "Snickers", 1.00)}
     > Snack</Button>);
+    console.log(arr);
     return arr;
     }
 
     render() {
+        var disp = this.state.buttArr.map(button => <div style={{ padding: 5}}> {button} </div>)
+    console.log(disp);
         return (
 			<div style={{ padding: 20 }}>
 			   <Grid container>
-				 {this.state.buttArr.map(button => <div style={{ padding: 5 }}> {button} </div>)}
+				 {disp}
 			   </Grid>
     </div>
 		);
