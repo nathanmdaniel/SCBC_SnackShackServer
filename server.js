@@ -6,12 +6,17 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 if(typeof require !== 'undefined') XLSX = require('xlsx');
-var workbook = XLSX.readFile('./SampleInventory.xlsx');
+var inventory = XLSX.readFile('./SampleInventory.xlsx');
 
-var merchSheet = workbook.Sheets['Merchandise'];
-var snacksSheet = workbook.Sheets['Snacks'];
-var drinksSheet = workbook.Sheets['Drinks'];
-var frozenSheet = workbook.Sheets['Frozen'];
+var merchSheet = inventory.Sheets['Merchandise'];
+var snacksSheet = inventory.Sheets['Snacks'];
+var drinksSheet = inventory.Sheets['Drinks'];
+var frozenSheet = inventory.Sheets['Frozen'];
+
+var records = XLSX.readFile('./Records.xlsx');
+
+var recSheet = records.Sheets['Sheet1'];
+console.log(recSheet);
 
 //Start the app
 app.prepare()
@@ -39,6 +44,12 @@ app.prepare()
     server.get('/FrozenJson', (req, res) => {
         const frozenJSON = XLSX.utils.sheet_to_json(frozenSheet)
         res.send(frozenJSON)
+        res.end()
+        return res;
+    })
+    server.get('/RecordsJson', (req, res) => {
+        const recordsJSON = XLSX.utils.sheet_to_json(recSheet)
+        res.send(recordsJSON)
         res.end()
         return res;
     })
