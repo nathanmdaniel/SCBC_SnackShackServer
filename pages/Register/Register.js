@@ -42,6 +42,7 @@ class Register extends React.Component {
         chips: [],
         prices: [],
         total: 0,
+        transactionNum: 0,
         merchSheet: null,
         snacksSheet: null,
         drinkSheet: null,
@@ -71,6 +72,7 @@ class Register extends React.Component {
         this.state.chips = [];
         this.state.prices = [];
         this.state.total = 0;
+        this.state.transactionNum++;
         this.forceUpdate();
     }
 
@@ -89,6 +91,7 @@ class Register extends React.Component {
                   removeClick={this.handleRemoveClick}
                   sendClick={this.handleSendClick}
                   transactionTotal={this.state.total}
+                  transactionNum={this.state.transactionNum}
                   > 
                 </TransactionCard>
               </Grid>

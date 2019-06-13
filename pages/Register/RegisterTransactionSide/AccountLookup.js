@@ -1,11 +1,11 @@
 import React from 'react';
-import AutocompleteNames from '../../Accounts/AutocompleteNames.js'
+import AutocompleteNames from '../../Accounts/AutocompleteNames.js';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 class TransactionAccountLookup extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.getNames = this.getNames.bind(this);
         this.lookupBalance = this.lookupBalance.bind(this);
         this.state = {
@@ -16,12 +16,15 @@ class TransactionAccountLookup extends React.Component {
     }
 
     lookupBalance(matchName) {
+        var found = 0;
         this.state.accountJson.forEach(info =>{
             if(info.Name === matchName) {
                 this.state.dispBalance = info.Balance;
-                console.log(info.Balance);
+                found = 1;
             }
         })
+        if (!found)
+            this.state.dispBalance = 0;
         this.forceUpdate();
     }
 
@@ -50,7 +53,7 @@ class TransactionAccountLookup extends React.Component {
             <div>
                 <Grid container>
                     <Grid item xs={8} >
-                        <AutocompleteNames getNames={this.getNames} lookupBalance={this.lookupBalance}/>
+                        <AutocompleteNames getNames={this.getNames} lookupBalance={this.lookupBalance} transactionNum={this.props.transactionNum}/>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography

@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import ExistingAccountLookup from './ExistingAccountLookup.js';
 import ExistingAccountDeposit from './ExistingAccountDeposit.js';
 import AutocompleteNames from './AutocompleteNames.js';
+import Grid from '@material-ui/core/Grid';
 
 class ExistingAccountInput extends React.Component {
     constructor() {
@@ -42,8 +43,15 @@ class ExistingAccountInput extends React.Component {
 			    <Typography gutterBottom variant="h5" component="h2">
 				    Existing Account Update
 			    </Typography>
-                <AutocompleteNames getNames={this.getNames}/>
-                <ExistingAccountDeposit/>
+                <Grid container>
+                    <Grid item sm={8} xs={12}>
+                        <AutocompleteNames getNames={this.getNames}/>
+                    </Grid>
+                    <Grid item sm={1} xs={false}/>
+                    <Grid item sm={3} xs={4}>
+                        <ExistingAccountDeposit/>
+                    </Grid>
+                </Grid>
             </div>
 		);
     }

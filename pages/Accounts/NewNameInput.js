@@ -7,6 +7,7 @@ class NewNameInput extends React.Component {
             <Input
             placeholder="Camper Name"
             inputProps={{'aria-label': 'Description',}}
+            fullWidth
             />
         );
     }

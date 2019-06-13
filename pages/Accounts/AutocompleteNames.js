@@ -64,6 +64,14 @@ class AutocompleteNames extends Component {
                 this.props.lookupBalance(e.currentTarget.innerText);
         };
 
+        
+        componentDidUpdate(prevProps) {
+            if (prevProps.transactionNum != this.props.transactionNum) {
+                this.setState({userInput: ""});
+                this.props.lookupBalance("");
+            }
+        }
+
         render() {
             const {
                 onChange,
@@ -117,6 +125,7 @@ return (
       onChange={onChange}
       onKeyDown={onKeyDown}
       value={userInput}
+      fullWidth
     />
 {suggestionsListComponent}
   </Fragment>

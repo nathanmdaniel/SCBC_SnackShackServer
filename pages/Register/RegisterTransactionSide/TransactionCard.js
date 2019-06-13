@@ -75,7 +75,7 @@ class TransactionCard extends React.Component {
                     </Typography>
                 </Grid>
 				<Grid item xs={12}> 
-                    <AccountLookup/>
+                    <AccountLookup transactionNum={this.props.transactionNum}/>
                 </Grid>
 				<Grid item xs={12}>
 					<Button fullWidth onClick={this.props.sendClick} style={{backgroundColor:'#c5e1a5', color: '#558b2f'}}>
