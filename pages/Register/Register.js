@@ -29,11 +29,23 @@ function genChipLabel(itemName, price) {
     return itemName + "  $" + price.toFixed(2);
 }
 
+
 class Register extends React.Component {
+    constructor() {
+        super();
+        this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleRemoveClick = this.handleRemoveClick.bind(this);
+        this.handleSendClick = this.handleSendClick.bind(this);
+    }
+
     state = {
         chips: [],
         prices: [],
         total: 0,
+        merchSheet: null,
+        snacksSheet: null,
+        drinkSheet: null,
+        frozenSheet: null,
     };
 
     handleButtonClick(itemName, price) {
@@ -62,13 +74,6 @@ class Register extends React.Component {
         this.forceUpdate();
     }
 
-    constructor() {
-        super();
-        this.handleButtonClick = this.handleButtonClick.bind(this);
-        this.handleRemoveClick = this.handleRemoveClick.bind(this);
-        this.handleSendClick = this.handleSendClick.bind(this);
-    }
-
     render() {
         const { classes } = this.props;
 
@@ -78,7 +83,7 @@ class Register extends React.Component {
               <Grid item xs={12} sm={8}>
                     <RegisterButtonContainer addChip={this.handleButtonClick}/>
               </Grid>
-              <Grid item xs={9} sm={4}>
+              <Grid item xs={12} sm={4}>
                 <TransactionCard 
                   chips={this.state.chips} 
                   removeClick={this.handleRemoveClick}

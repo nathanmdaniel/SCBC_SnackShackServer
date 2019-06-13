@@ -13,6 +13,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import AccountLookup from './AccountLookup.js';
 
 
 const styles = theme => ({
@@ -73,8 +74,9 @@ class TransactionCard extends React.Component {
                         {generateTotal(this.props.transactionTotal.toFixed(2))}
                     </Typography>
                 </Grid>
-				<Grid item xs={8}> Account Name </Grid>
-				<Grid item xs={4}> Account Balance</Grid>
+				<Grid item xs={12}> 
+                    <AccountLookup/>
+                </Grid>
 				<Grid item xs={12}>
 					<Button fullWidth onClick={this.props.sendClick} style={{backgroundColor:'#c5e1a5', color: '#558b2f'}}>
 						<SvgIcon>
