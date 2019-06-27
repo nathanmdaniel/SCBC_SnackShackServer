@@ -69,6 +69,72 @@ class Register extends React.Component {
     }
 
     handleSendClick() {
+        var http = new XMLHttpRequest();
+        var url = 'http://localhost:3001/DecInventories';
+
+        //var data = new FormData();
+        //data.append('user', 'person');
+        //data.append('pwd', 'password');
+        //data.append('organization', 'place');
+        //data.append('requiredkey', 'key');
+        //Send the proper header information along with the request
+        //http.setRequestHeader('Content-type', 'application/json');
+        //http.send(data);
+
+        /*
+        // try 2
+        var data = JSON.stringify("sent string successfully");
+
+        http.open('POST', url, true);
+
+        //Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/json');
+        
+        http.send(data);
+        console.log("sent data");
+        */
+
+        //try 3
+        //var request = require('request');
+        //http.open('POST', url, true);
+        //var myJSONObject = JSON.stringify("sent string successfully");
+        //console.log(myJSONObject);
+        //console.log(JSON.parse(myJSONObject))
+        ////Send the proper header information along with the request
+        //http.setRequestHeader('Content-type', 'application/json');
+
+        //http.onreadystatechange = function() {
+        //    if(http.readyState == 4 && http.status == 200) {
+        //        alert(http.responseText);
+        //    }
+        //}
+
+        //http.send(myJSONObject);
+
+
+        //try 4: 
+        fetch('http://localhost:3001/DecInventories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: {
+                    name: "John",
+                    email: "john@example.com"
+                }
+            })
+        });
+
+        //request({
+        //    url: url,
+        //    method: "POST",
+        //    json: true,   // <--Very important!!!
+        //    body: myJSONObject
+        //}, function (error, response, body){
+        //    console.log(response);
+        //});
+
         this.state.chips = [];
         this.state.prices = [];
         this.state.total = 0;

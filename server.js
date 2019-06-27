@@ -5,6 +5,8 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+
+const bodyParser = require('body-parser');
 if(typeof require !== 'undefined') XLSX = require('xlsx');
 var inventory = XLSX.readFile('./SampleInventory.xlsx');
 
@@ -18,11 +20,15 @@ var records = XLSX.readFile('./Records.xlsx');
 var recSheet = records.Sheets['Sheet1'];
 console.log(recSheet);
 
+
 //Start the app
 app.prepare()
 //Start Express server and serve the 
 .then(() => {
     const server = express()
+    server.use(bodyParser.json());
+    server.use(bodyParser.urlencoded({ extended: true }));
+
     server.get('/MerchJson', (req, res) => {
         const merchJSON = XLSX.utils.sheet_to_json(merchSheet)
         res.send(merchJSON)
@@ -55,6 +61,10 @@ app.prepare()
     })
     server.get('*', (req, res) => {
         return handle(req, res)
+    })
+
+    server.post('/DecInventories', (req, res) => {
+        console.log(req.body)
     })
     server.listen(3001, (err) => {
         if (err) throw err

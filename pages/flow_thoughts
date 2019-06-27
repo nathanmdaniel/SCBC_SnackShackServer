@@ -1,31 +1,11 @@
-pass workbook from:
-server ->
-index ->
-app ->
-register ->
-	registerButtonContainer ->
-	buttonLoader ->
-	-> each of CategorizedButtons(split into worksheets there)
-
-	transactionCard
-
-
-
-in each CategprozedButton, need to store the position(sheet and row) it represents
-- onClick() -> send position up to Register
-
-in Register, send position down into Transaction Card
-
-in Transaction Card, need to store the workbook(read-only) to display name/price
-
-TransactionCard needs to use chips. They will store the position(sheet and row), name,
-	price, and a function to send the position out to the transactionCard(for remove)
-
 TransactionCard should keep track of items by keeping an array of chips. Remove function 
 	should use splice to cut that item out of the array.
 
 TransactionCard should keep track of active chip, default should be last chip in array
 	(for remove function)
 
+Things to post data:
+- New and Existing user input (send name and deposit)
+- transaction (array of items, name, total cost)
 
 
