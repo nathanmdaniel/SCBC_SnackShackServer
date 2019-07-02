@@ -15,7 +15,6 @@ class AutocompleteNames extends Component {
 
         constructor(props) {
             super(props);
-
             this.state = {
                 // The active selection's index
                 activeSuggestion: 0,
@@ -62,6 +61,8 @@ class AutocompleteNames extends Component {
             });
             if(this.props.lookupBalance) 
                 this.props.lookupBalance(e.currentTarget.innerText);
+            if(this.props.setCamperName)
+                this.props.setCamperName(e.currentTarget.innerText);
         };
 
         

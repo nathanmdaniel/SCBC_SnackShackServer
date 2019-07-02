@@ -38,7 +38,16 @@ function generateTotal(total) {
 class TransactionCard extends React.Component {
 	constructor(props) {
 	    super(props);
+	    this.setCamperName = this.setCamperName.bind(this);
 	}
+
+    state = {
+        camperName: "placehold",
+    };
+
+    setCamperName(name) {
+        this.setState( {camperName: name} );
+    }
 
 	render() {
 		const { classes } = this.props;
@@ -75,10 +84,10 @@ class TransactionCard extends React.Component {
                     </Typography>
                 </Grid>
 				<Grid item xs={12}> 
-                    <AccountLookup transactionNum={this.props.transactionNum}/>
+                    <AccountLookup setCamperName={this.setCamperName} transactionNum={this.props.transactionNum}/>
                 </Grid>
 				<Grid item xs={12}>
-					<Button fullWidth onClick={this.props.sendClick} style={{backgroundColor:'#c5e1a5', color: '#558b2f'}}>
+					<Button fullWidth onClick={this.props.sendClick.bind(this, this.state.camperName)} style={{backgroundColor:'#c5e1a5', color: '#558b2f'}}>
 						<SvgIcon>
 							<path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
 						</SvgIcon>

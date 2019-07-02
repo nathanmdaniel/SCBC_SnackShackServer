@@ -18,8 +18,24 @@ var frozenSheet = inventory.Sheets['Frozen'];
 var records = XLSX.readFile('./Records.xlsx');
 
 var recSheet = records.Sheets['Sheet1'];
-console.log(recSheet);
 
+
+function chargeBalance(name, amount) {
+    var balJson = XLSX.utils.sheet_to_json(recSheet);
+    //console.log("BEFORE    ", balJson);
+    balJson.forEach(account =>{
+        if (name === account.Name) {
+            account.Spent += amount;
+            account.Balance -= amount;
+        }
+    })
+    //console.log("AFTER    ", balJson);
+
+    records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(balJson);
+    recSheet = records.Sheets['Sheet1'];
+
+    XLSX.writeFile(records, 'Records.xlsx');
+}
 
 //Start the app
 app.prepare()
@@ -63,8 +79,12 @@ app.prepare()
         return handle(req, res)
     })
 
+    // DecrementInventories & Account's Balance
     server.post('/DecInventories', (req, res) => {
-        console.log(req.body)
+        //console.log(req.body)
+        chargeBalance(req.body.name, req.body.price);
+        res.end();
+        return res;
     })
     server.listen(3001, (err) => {
         if (err) throw err

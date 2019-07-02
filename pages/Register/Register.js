@@ -41,21 +41,19 @@ class Register extends React.Component {
     state = {
         chips: [],
         prices: [],
+        items: [],
         total: 0,
         transactionNum: 0,
-        merchSheet: null,
-        snacksSheet: null,
-        drinkSheet: null,
-        frozenSheet: null,
     };
 
-    handleButtonClick(itemName, price) {
+    handleButtonClick(itemName, sourceSheet, price) {
         this.state.chips.push(
         <Chip
             label={genChipLabel(itemName, price)}
 			onClick={handleChipClick}
             style={{color: '#283593', width: '100%', fontWeight: 'bold', margin: 1}}
         />);
+        this.state.items.push({sheet: sourceSheet, item: itemName});
         this.state.prices.push(price);
         this.state.total = this.state.total + price;
         this.forceUpdate();
@@ -64,66 +62,24 @@ class Register extends React.Component {
     handleRemoveClick() {
 
         this.state.chips.pop();
+        this.state.items.pop();
         this.state.total -= this.state.prices.pop();
         this.forceUpdate();
     }
 
-    handleSendClick() {
-        var http = new XMLHttpRequest();
-        var url = 'http://localhost:3001/DecInventories';
-
-        //var data = new FormData();
-        //data.append('user', 'person');
-        //data.append('pwd', 'password');
-        //data.append('organization', 'place');
-        //data.append('requiredkey', 'key');
-        //Send the proper header information along with the request
-        //http.setRequestHeader('Content-type', 'application/json');
-        //http.send(data);
-
-        /*
-        // try 2
-        var data = JSON.stringify("sent string successfully");
-
-        http.open('POST', url, true);
-
-        //Send the proper header information along with the request
-        http.setRequestHeader('Content-type', 'application/json');
-        
-        http.send(data);
-        console.log("sent data");
-        */
-
-        //try 3
-        //var request = require('request');
-        //http.open('POST', url, true);
-        //var myJSONObject = JSON.stringify("sent string successfully");
-        //console.log(myJSONObject);
-        //console.log(JSON.parse(myJSONObject))
-        ////Send the proper header information along with the request
-        //http.setRequestHeader('Content-type', 'application/json');
-
-        //http.onreadystatechange = function() {
-        //    if(http.readyState == 4 && http.status == 200) {
-        //        alert(http.responseText);
-        //    }
-        //}
-
-        //http.send(myJSONObject);
-
-
-        //try 4: 
+    handleSendClick(customerName) {
         fetch('http://localhost:3001/DecInventories', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                user: {
-                    name: "John",
-                    email: "john@example.com"
-                }
+                name: customerName,
+                price: this.state.total,
+                items: this.state.items
             })
+        }).catch((error) => {
+            console.log(error);
         });
 
         //request({
@@ -137,6 +93,7 @@ class Register extends React.Component {
 
         this.state.chips = [];
         this.state.prices = [];
+        this.state.items = [];
         this.state.total = 0;
         this.state.transactionNum++;
         this.forceUpdate();

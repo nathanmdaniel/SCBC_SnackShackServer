@@ -8,6 +8,7 @@ class TransactionAccountLookup extends React.Component {
         super(props);
         this.getNames = this.getNames.bind(this);
         this.lookupBalance = this.lookupBalance.bind(this);
+        this.readAccounts = this.readAccounts.bind(this);
         this.state = {
             accountJson: null,
             names: [],
@@ -31,7 +32,7 @@ class TransactionAccountLookup extends React.Component {
     getNames() {
         return this.state.names;
     }
-    componentDidMount() {
+    readAccounts() {
         var url = 'http://localhost:3001/RecordsJson'
         fetch(url).then(response => {
             return response.json();
@@ -47,13 +48,20 @@ class TransactionAccountLookup extends React.Component {
             console.error(error);
         });
     }
-
+    componentDidMount() {
+        this.readAccounts();
+    }
+    componentDidUpdate(prevProps) {
+        if (prevProps.transactionNum != this.props.transactionNum) {
+            this.readAccounts();
+        }
+    }
     render() {
         return (
             <div>
                 <Grid container>
                     <Grid item xs={8} >
-                        <AutocompleteNames getNames={this.getNames} lookupBalance={this.lookupBalance} transactionNum={this.props.transactionNum}/>
+                        <AutocompleteNames setCamperName={this.props.setCamperName} getNames={this.getNames} lookupBalance={this.lookupBalance} transactionNum={this.props.transactionNum}/>
                     </Grid>
                     <Grid item xs={4}>
                         <Typography
