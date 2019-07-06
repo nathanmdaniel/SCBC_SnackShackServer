@@ -132,12 +132,32 @@ app.prepare()
 
     // Add account to Records spreadsheet
     server.post('/NewAccount', (req, res) => {
+        var recJson = XLSX.utils.sheet_to_json(recSheet);
+        recJson.push({ Name: req.body.name, Deposited: req.body.balance, Spent: 0, Balance: req.body.balance });
+        records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
+        recSheet = records.Sheets['Sheet1'];
+        XLSX.writeFile(records, 'Records.xlsx');
+
         res.end();
         return res;
     })
 
     // Increase balance of account in Records spreadsheet
     server.post('/CreditAccount', (req, res) => {
+        var recJson = XLSX.utils.sheet_to_json(recSheet);
+        
+        recJson.forEach(account => {
+            if (req.body.name === account.Name) {
+                account.Deposited += req.body.amount;
+                account.Balance += req.body.amount;
+                // no break in JS foreach?
+            }
+        })
+
+        records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
+        recSheet = records.Sheets['Sheet1'];
+        XLSX.writeFile(records, 'Records.xlsx');
+
         res.end();
         return res;
     })

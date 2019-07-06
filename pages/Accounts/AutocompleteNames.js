@@ -69,7 +69,9 @@ class AutocompleteNames extends Component {
         componentDidUpdate(prevProps) {
             if (prevProps.transactionNum != this.props.transactionNum) {
                 this.setState({userInput: ""});
-                this.props.lookupBalance("");
+                if(this.props.lookupBalance) {
+                    this.props.lookupBalance("");
+                }
             }
         }
 
