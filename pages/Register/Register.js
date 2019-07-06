@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Tabs from './RegisterButtonSide/Tabs.js';
 import TransactionCard from './RegisterTransactionSide/TransactionCard.js'
 import RegisterButtonContainer from './RegisterButtonSide/RegisterButtonContainer.js';
+import CheckoutChip from './RegisterTransactionSide/CheckoutChip.js';
+
 import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
@@ -21,10 +23,6 @@ const styles = theme => ({
     },
 });
 
-function handleChipClick() {
-    console.log("chip clicked");
-}
-
 function genChipLabel(itemName, price) {
     return itemName + "  $" + price.toFixed(2);
 }
@@ -36,6 +34,7 @@ class Register extends React.Component {
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handleRemoveClick = this.handleRemoveClick.bind(this);
         this.handleSendClick = this.handleSendClick.bind(this);
+        this.handleChipClick = this.handleChipClick.bind(this);
     }
 
     state = {
@@ -44,26 +43,36 @@ class Register extends React.Component {
         items: [],
         total: 0,
         transactionNum: 0,
+        activeChipIndex: 0
     };
+
+    handleChipClick(chip) {
+        for (var i = 0; i < this.state.chips.length; ++i) {
+            if(this.state.chips[i].props.label == chip.props.label) {
+                this.setState({activeChipIndex: i});
+                return;
+            }
+        }
+    }
 
     handleButtonClick(itemName, sourceSheet, price) {
         this.state.chips.push(
-        <Chip
+        <CheckoutChip
             label={genChipLabel(itemName, price)}
-			onClick={handleChipClick}
-            style={{color: '#283593', width: '100%', fontWeight: 'bold', margin: 1}}
+            handleChipClick={this.handleChipClick}
         />);
         this.state.items.push({sheet: sourceSheet, item: itemName});
         this.state.prices.push(price);
         this.state.total = this.state.total + price;
+        this.setState({activeChipIndex: this.state.chips.length - 1});
         this.forceUpdate();
     }
 
     handleRemoveClick() {
-
-        this.state.chips.pop();
-        this.state.items.pop();
-        this.state.total -= this.state.prices.pop();
+        this.state.chips.splice(this.state.activeChipIndex, 1);
+        this.state.items.splice(this.state.activeChipIndex, 1);
+        this.state.total -= this.state.prices.splice(this.state.activeChipIndex, 1);
+        this.setState({activeChipIndex: this.state.chips.length - 1});
         this.forceUpdate();
     }
 

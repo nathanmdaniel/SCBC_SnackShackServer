@@ -42,7 +42,7 @@ class TransactionCard extends React.Component {
 	}
 
     state = {
-        camperName: "placehold",
+        camperName: "placeholder",
     };
 
     setCamperName(name) {
