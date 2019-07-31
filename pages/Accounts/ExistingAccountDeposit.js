@@ -4,7 +4,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 class ExistingAccountDeposit extends React.Component {
     onChange = e => {
-        const userInput = parseInt(e.currentTarget.value);
+        const userInput = parseFloat(e.currentTarget.value);
 
         this.props.setAmount(userInput);
     };

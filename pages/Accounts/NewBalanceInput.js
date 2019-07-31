@@ -4,7 +4,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 
 class NewBalanceInput extends React.Component {
     onChange = e => {
-        const userInput = parseInt(e.currentTarget.value);
+        const userInput = parseFloat(e.currentTarget.value);
 
         this.props.setTotal(userInput);
     };

@@ -123,7 +123,6 @@ app.prepare()
 
     // Decrement Inventories & Account's Balance
     server.post('/DecInventories', (req, res) => {
-        //console.log(req.body)
         chargeBalance(req.body.name, req.body.price);
         decrementInventories(req.body.items);
         res.end();
@@ -164,7 +163,7 @@ app.prepare()
 
     server.listen(3001, (err) => {
         if (err) throw err
-        console.log('> Ready on http://localhost:3001')
+        console.log('> Ready on http://192.168.1.2:3001')
     })
 })
 .catch((ex) => {

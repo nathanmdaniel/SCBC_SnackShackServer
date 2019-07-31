@@ -53,6 +53,9 @@ class AutocompleteNames extends Component {
         // Event fired when the user clicks on a suggestion
         onClick = e => {
             // Update the user input and reset the rest of the state
+            if(e.currentTarget.innerText.substr(-1) == "\n") {
+                e.currentTarget.innerText = e.currentTarget.innerText.substr(0, e.currentTarget.innerText.length - 1);
+            }
             this.setState({
                 activeSuggestion: 0,
                 filteredSuggestions: [],
