@@ -11,10 +11,10 @@ The program supports entering transactions from multiple devices (phones, laptop
 
 2. Connect to the Network
    - Connect using the following credentials.
-```
-Name: SnackShack
-Password: royalstreet006
-```
+    ```
+    Name: SnackShack
+    Password: royalstreet006
+    ```
    - If you connected successfully, your device should say something along the lines of "Connected, No Internet". 
 
    - For smartphones, you MUST disable your mobile data for your phone to connect properly. Otherwise, your device will see it is not connected to the internet through the WiFi and use mobile data instead.
@@ -29,7 +29,12 @@ Password: password
 3. Start Up the Server on the Server Device
    - No matter how many devices connect, we want them all to use and make changes to the same spreadsheets. To achieve this, we'll designate one device to be in charge of the spreadsheets. All the other devices will ask this device to recieve information like campers' balances, and they will ask this device to make changes like charging an account for a transaction.
 
+   - There are a few requirements of the server device. For this section, the most important thing is that the device must be a computer, not a phone. We'll go into the rest in a loter section.
 
+   - To get the server running, double click the file `RunServer.bat`. It will take a moment to get things going, but you are looking for a line that says `Ready on http://192.168.1.2:3001`. Once that message appears, devices can begin accessing the site.
+
+4. Accessing the Site
+   - Use your web browser and go to `http://192.168.1.2:3001` for the main landing or `http://192.168.1.2:3001/RegisterPage` to go straight to the register.
 
 ## Understanding the Layout
 
