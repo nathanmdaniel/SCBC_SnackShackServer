@@ -7,7 +7,7 @@ Hello! Welcome to a quick guide to Sandy Creek Bible Camp's Snack Shack program.
 The program supports entering transactions from multiple devices (phones, laptops, etc.). It does this by having all devices connecting to the "SnackShack" network. This network is not connected to the internet but is simply used to connect all the devices being used at a given time.
 
 1. Ensure router is plugged in and turned on
-If the router is ready, the light over 2.4Ghz should be lit up.
+   - If the router is ready, the light over 2.4Ghz should be lit up.
 
 2. Connect to the Network
 Connect using the following credentials.
