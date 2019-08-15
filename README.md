@@ -41,7 +41,7 @@ The program supports entering transactions from multiple devices (phones, laptop
 ## Understanding the Layout
 There are two primary pages on this site. Firstly, the register page is used to record orders campers make. The other page is the accounts page. It is used for adding to a camper's balance. You can navigate between these pages by using the menu bar on the top left corner.
 
-![MenuScreen](./screenshots/MenuScreen.png?raw=true)
+![MenuScreen](./screenshots/MenuScreen.PNG?raw=true)
 
 ## Using the Register Page
 There are two sides to the register page. On the left are the buttons for the various items up for sale at the Snack Shack. They are divided into four categories: merchandise, food (candy, chips, etc.), drinks, and ice cream. The right side describes the current transaction.
