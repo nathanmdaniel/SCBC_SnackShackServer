@@ -8,36 +8,27 @@ const handle = app.getRequestHandler()
 
 const bodyParser = require('body-parser');
 if(typeof require !== 'undefined') XLSX = require('xlsx');
-var inventory = XLSX.readFile('./SampleInventory.xlsx');
+var inventory = XLSX.readFile('./Inventory.xlsx');
 
-/*
-var merchSheet = inventory.Sheets['Merchandise'];
-var snacksSheet = inventory.Sheets['Snacks'];
-var drinksSheet = inventory.Sheets['Drinks'];
-var frozenSheet = inventory.Sheets['Frozen'];
-*/
 
-var records = XLSX.readFile('./Records.xlsx');
+var records = XLSX.readFile('./CurrentWeekAccounts.xlsx');
 
 var recSheet = records.Sheets['Sheet1'];
 
 
 function chargeBalance(name, amount) {
     var balJson = XLSX.utils.sheet_to_json(recSheet);
-    //console.log("BEFORE    ", balJson);
     balJson.forEach(account =>{
         if (name === account.Name) {
             account.Spent += amount;
             account.Balance -= amount;
-            // no break in JS foreach?
         }
     })
-    //console.log("AFTER    ", balJson);
 
     records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(balJson);
     recSheet = records.Sheets['Sheet1'];
 
-    XLSX.writeFile(records, 'Records.xlsx');
+    XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
 }
 
 function decrementInventories(transactionItems) {
@@ -72,7 +63,7 @@ function decrementInventories(transactionItems) {
     inventory.Sheets['Drinks'] = XLSX.utils.json_to_sheet(drinksJson);
     inventory.Sheets['Frozen'] = XLSX.utils.json_to_sheet(frozenJson);
 
-    XLSX.writeFile(inventory, 'SampleInventory.xlsx');
+    XLSX.writeFile(inventory, 'Inventory.xlsx');
 }
 
 //Start the app
@@ -129,19 +120,19 @@ app.prepare()
         return res;
     })
 
-    // Add account to Records spreadsheet
+    // Add account to CurrentWeekAccounts spreadsheet
     server.post('/NewAccount', (req, res) => {
         var recJson = XLSX.utils.sheet_to_json(recSheet);
         recJson.push({ Name: req.body.name, Deposited: req.body.balance, Spent: 0, Balance: req.body.balance });
         records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
         recSheet = records.Sheets['Sheet1'];
-        XLSX.writeFile(records, 'Records.xlsx');
+        XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
 
         res.end();
         return res;
     })
 
-    // Increase balance of account in Records spreadsheet
+    // Increase balance of account in CurrentWeekAccounts spreadsheet
     server.post('/CreditAccount', (req, res) => {
         var recJson = XLSX.utils.sheet_to_json(recSheet);
         
@@ -149,13 +140,12 @@ app.prepare()
             if (req.body.name === account.Name) {
                 account.Deposited += req.body.amount;
                 account.Balance += req.body.amount;
-                // no break in JS foreach?
             }
         })
 
         records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
         recSheet = records.Sheets['Sheet1'];
-        XLSX.writeFile(records, 'Records.xlsx');
+        XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
 
         res.end();
         return res;
