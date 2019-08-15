@@ -39,7 +39,9 @@ The program supports entering transactions from multiple devices (phones, laptop
    - Use your web browser and go to `http://192.168.1.2:3001` for the main landing or `http://192.168.1.2:3001/RegisterPage` to go straight to the register.
 
 ## Understanding the Layout
-There are two primary pages on this site. Firstly, the register page is used to record orders campers make. The other page is the accounts page. It is used for adding to a csmper's balance. You can navigate between these pages by using the menu bar on the top left corner.
+There are two primary pages on this site. Firstly, the register page is used to record orders campers make. The other page is the accounts page. It is used for adding to a camper's balance. You can navigate between these pages by using the menu bar on the top left corner.
+
+(./screenshots/MenuScreen.png)
 
 ## Using the Register Page
 There are two sides to the register page. On the left are the buttons for the various items up for sale at the Snack Shack. They are divided into four categories: merchandise, food (candy, chips, etc.), drinks, and ice cream. The right side describes the current transaction.
@@ -48,7 +50,7 @@ As you click buttons on the left side they will appear in the white, blank area 
 
 
 ## Using the Accounts Page
-There are two actions you can do on this page: create a new account and credit an existing account. These work as you would expect. Once again, the search bar for the existing account has autocomplete, so you can start typing either the first or last name and matches should statt popping up.
+There are two actions you can do on this page: create a new account and credit an existing account. These work as you would expect. Once again, the search bar for the existing account has autocomplete, so you can start typing either the first or last name and matches should start popping up.
 
 ## Working with the Spreadsheets
 
