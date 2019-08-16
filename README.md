@@ -77,9 +77,9 @@ The Inventory.xlsx file is a little more complex. Every time you start up the se
 
 Please report problems you encounter as soon as you encounter the. If you run through the solutions listed below, contact me!
 
--Buttons or autofill names are not appearing?
- -Check if the server is still running.
- -Check if the IP address of the server device is 192.168.1.2.
--Balances are not appearing when a name is selected?
- -Check if the server is still running.
- -Try just typing the whole name out.
+- Buttons or autofill names are not appearing?
+  - Check if the server is still running.
+  - Check if the IP address of the server device is 192.168.1.2.
+- Balances are not appearing when a name is selected?
+  - Check if the server is still running.
+  - Try just typing the whole name out.
