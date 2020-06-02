@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountsMenuItem from '../MainMenuItems/AccountsMenuItem.js'
 import RegisterMenuItem from '../MainMenuItems/RegisterMenuItem.js'
+import CheckOutMenuItem from '../MainMenuItems/CheckOutMenuItem.js'
 
 const styles = {
     list: {
@@ -36,6 +37,7 @@ class TemporaryDrawer extends React.Component {
             <List>
                 <RegisterMenuItem/>
                 <AccountsMenuItem/>
+                <CheckOutMenuItem/>
             </List>
             </div>
         );

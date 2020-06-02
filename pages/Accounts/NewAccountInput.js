@@ -34,7 +34,8 @@ class NewAccountInput extends React.Component {
             document.getElementById("newBalanceInput").value = "";
             return;
         }
-        fetch('http://192.168.1.2:3001/NewAccount', {
+        // fetch('http://192.168.1.2:3001/NewAccount', {
+        fetch('http://localhost:3001/NewAccount', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

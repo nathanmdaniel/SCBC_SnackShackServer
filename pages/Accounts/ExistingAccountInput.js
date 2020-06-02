@@ -43,7 +43,8 @@ class ExistingAccountInput extends React.Component {
             document.getElementById("depositInput").value = "";
             return;
         }
-        fetch('http://192.168.1.2:3001/CreditAccount', {
+        // fetch('http://192.168.1.2:3001/CreditAccount', {
+        fetch('http://localhost:3001/CreditAccount', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,7 +66,8 @@ class ExistingAccountInput extends React.Component {
     }
 
     componentDidMount() {
-        var url = 'http://192.168.1.2:3001/RecordsJson'
+        // var url = 'http://192.168.1.2:3001/RecordsJson'
+        var url = 'http://localhost:3001/RecordsJson'
         fetch(url).then(response => {
             return response.json();
         })
