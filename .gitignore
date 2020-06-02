@@ -1,0 +1,2 @@
+# do not save .next. It is created at runtime
+./.next

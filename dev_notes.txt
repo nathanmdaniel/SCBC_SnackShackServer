@@ -1,0 +1,9 @@
+Locations to change ip_address:
+    pages\Accounts\ExistingAccountInput.js
+    pages\Accounts\NewAccountInput.js
+    pages\Register\Register.js
+    pages\Register\RegisterButtonSide\CategorizedButtons\ClothingButtons.js
+    pages\Register\RegisterButtonSide\CategorizedButtons\DrinkButtons.js
+    pages\Register\RegisterButtonSide\CategorizedButtons\FrozenButtons.js
+    pages\Register\RegisterButtonSide\CategorizedButtons\SnackButtons.js
+    pages\Register\RegisterTransactionSide\AccountLookup.js
