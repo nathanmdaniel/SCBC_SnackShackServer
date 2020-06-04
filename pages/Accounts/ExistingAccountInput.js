@@ -89,7 +89,7 @@ class ExistingAccountInput extends React.Component {
 			    <Typography gutterBottom variant="h5" component="h2">
 				    Existing Account Update
 			    </Typography>
-                <Grid container spacing={8}>
+                <Grid container spacing={1}>
                     <Grid item sm={8} xs={12}>
                         <AutocompleteNames transactionNum={this.state.transactionNum} setCamperName={this.setCurName} getNames={this.getNames}/>
                     </Grid>

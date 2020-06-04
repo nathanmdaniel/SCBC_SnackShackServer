@@ -61,7 +61,7 @@ class NewAccountInput extends React.Component {
 			    <Typography gutterBottom variant="h5" component="h2">
 				    New Account Input
 			    </Typography>
-                <Grid container spacing={8}>
+                <Grid container spacing={1}>
                     <Grid item sm={8} xs={12}>
                         <NewNameInput transactionNum={this.state.transactionNum} setName={this.setName}/>
                     </Grid>

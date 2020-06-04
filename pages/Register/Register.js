@@ -13,10 +13,10 @@ import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
     root: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     paper: {
-        padding: theme.spacing.unit * 2,
+        padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
         margin: "10px",
@@ -114,7 +114,7 @@ class Register extends React.Component {
 
         return (
           <div className={classes.root}>
-            <Grid container spacing={8}>
+            <Grid container spacing={0}>
               <Grid item xs={12} sm={8}>
                     <RegisterButtonContainer addChip={this.handleButtonClick}/>
               </Grid>
@@ -125,6 +125,7 @@ class Register extends React.Component {
                   sendClick={this.handleSendClick}
                   transactionTotal={this.state.total}
                   transactionNum={this.state.transactionNum}
+                  style={{padding: "10px"}}
                   > 
                 </TransactionCard>
               </Grid>
