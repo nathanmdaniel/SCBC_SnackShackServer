@@ -18,8 +18,10 @@ var recSheet = records.Sheets['Sheet1'];
 
 function chargeBalance(name, amount) {
     var balJson = XLSX.utils.sheet_to_json(recSheet);
+    var found = false;
     balJson.forEach(account =>{
         if (name === account.Name) {
+            found = true;
             account.Spent += amount;
             account.Balance -= amount;
         }
@@ -29,6 +31,8 @@ function chargeBalance(name, amount) {
     recSheet = records.Sheets['Sheet1'];
 
     XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
+
+    return found;
 }
 
 function decrementInventories(transactionItems) {
@@ -114,8 +118,9 @@ app.prepare()
 
     // Decrement Inventories & Account's Balance
     server.post('/DecInventories', (req, res) => {
-        chargeBalance(req.body.name, req.body.price);
+        const found = chargeBalance(req.body.name, req.body.price);
         decrementInventories(req.body.items);
+        res.send({"found": found});
         res.end();
         return res;
     })

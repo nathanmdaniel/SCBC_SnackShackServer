@@ -27,7 +27,7 @@ class AccountsPage extends React.Component {
 				<div>
 					<ButtonAppBar/>
 				</div>
-				<Grid container justify='center' spacing={8} style={{padding: '50px'}}>
+				<Grid container justify='center' spacing={2} style={{padding: '50px'}}>
 					<Grid item sm={1}/>
 					<Grid item sm={6} style={{minHeight: '200px'}}>
 						<Paper style={{padding:'50px'}}>

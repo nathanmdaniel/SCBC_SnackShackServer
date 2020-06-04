@@ -8,6 +8,7 @@ import Tabs from './RegisterButtonSide/Tabs.js';
 import TransactionCard from './RegisterTransactionSide/TransactionCard.js'
 import RegisterButtonContainer from './RegisterButtonSide/RegisterButtonContainer.js';
 import CheckoutChip from './RegisterTransactionSide/CheckoutChip.js';
+import TextField from '@material-ui/core/TextField';
 
 import Chip from '@material-ui/core/Chip';
 
@@ -77,6 +78,7 @@ class Register extends React.Component {
     }
 
     handleSendClick(customerName) {
+        const cost = this.state.total;
         // fetch('http://192.168.1.2:3001/DecInventories', {
             fetch('http://localhost:3001/DecInventories', {
             method: 'POST',
@@ -88,7 +90,20 @@ class Register extends React.Component {
                 price: this.state.total,
                 items: this.state.items
             })
-        }).catch((error) => {
+        }).then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            var outputString = ""
+            if (myJson.found) {
+                outputString = "Successfully charged \"" + customerName + "\" $" + cost + "\n";
+            }
+            else {
+                outputString = "Failed to charge \"" + customerName + "\" $" + cost + "\n";
+            }
+            document.getElementById("server-output").value += outputString;
+        })
+        .catch((error) => {
             console.log(error);
         });
 
@@ -101,16 +116,25 @@ class Register extends React.Component {
         //    console.log(response);
         //});
 
-        this.state.chips = [];
-        this.state.prices = [];
-        this.state.items = [];
-        this.state.total = 0;
-        this.state.transactionNum++;
+        // this.state.chips = [];
+        // this.state.prices = [];
+        // this.state.items = [];
+        // this.state.total = 0;
+        // this.state.transactionNum++;
+        const newTN = this.state.transactionNum + 1;
+        this.setState({
+            chips: [],
+            prices: [],
+            items: [],
+            total: 0,
+            transactionNum: newTN
+        });
         this.forceUpdate();
     }
-
+// <textarea id="server-output" readOnly style={{width:'100%'}}/>
     render() {
         const { classes } = this.props;
+        const tc_key = `transaction-card-${this.state.transactionNum}`;
 
         return (
           <div className={classes.root}>
@@ -120,6 +144,7 @@ class Register extends React.Component {
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TransactionCard 
+                    key={tc_key}
                   chips={this.state.chips} 
                   removeClick={this.handleRemoveClick}
                   sendClick={this.handleSendClick}
@@ -129,6 +154,15 @@ class Register extends React.Component {
                   > 
                 </TransactionCard>
               </Grid>
+                <Grid item xs={12} sm={8}>
+                    <TextField
+                        id="server-output"
+                        multiline
+                        rows={2}
+                        fullWidth
+                        variant="outlined"
+                        />
+                </Grid>
             </Grid>
           </div>
         );
