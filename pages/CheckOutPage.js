@@ -43,8 +43,8 @@ class CheckOutPage extends React.Component {
             myJson.forEach(info =>{
                 ret.push([[info.Name, info.Balance]])
             })
-            console.log(ret);
-            console.log(typeof ret[0][0], typeof ret[0][1])
+            // console.log(ret);
+            // console.log(typeof ret[0][0], typeof ret[0][1])
             this.setState({envel_arr: ret});
         })
         .catch((error) => {
@@ -80,11 +80,15 @@ class CheckOutPage extends React.Component {
             new_envel[this.state.checked[0]] = new_envel[this.state.checked[0]].concat(toAdd);
         }
         // remove originals (start from end to not corrupt index values)
-        for (var i = this.state.checked.length - 1; i > 0; --i) {
-            const toAdd = new_envel.splice(this.state.checked[i], 1)[0];
+        this.state.checked.shift();
+        const sorted_checked = this.state.checked.sort(function(a, b){return a-b});
+        for (var i = sorted_checked.length - 1; i >= 0; --i) {
+            const toAdd = new_envel.splice(sorted_checked[i], 1)[0];
         }
         // console.log(new_envel)
-        this.setState({envel_arr: new_envel, checked: []});
+        if (this.state.envel_arr.length != new_envel.length) {
+            this.setState({envel_arr: new_envel, checked: []});
+        }
     }
 
     divide() {
@@ -108,9 +112,9 @@ class CheckOutPage extends React.Component {
                 }
             }
         }
-        this.setState({envel_arr: new_envel, checked: []});
-        // console.log("envel_arr ", this.state.envel_arr)
-        // console.log("checked ", this.state.checked)
+        if (this.state.envel_arr.length != new_envel.length) {
+            this.setState({envel_arr: new_envel, checked: []});
+        }
     }
 
 	render() {
