@@ -16,20 +16,22 @@ import Grid from '@material-ui/core/Grid';
     componentDidMount() {
         var arr = [];
         var data = null;
-        // var url = 'http://192.168.1.2:3001/FrozenJson'
-        var url = 'http://localhost:3001/FrozenJson'
+        var url = 'http://192.168.1.114:3001/FrozenJson'
+        // var url = 'http://localhost:3001/FrozenJson'
         fetch(url).then(response => {
             return response.json();
         })
         .then(myJson => {
             data = myJson;
             data.forEach(info =>{
-                var thisButton = <Button 
-                style={{backgroundColor: "#42a5f5", color: '#faebd7', fontWeight: 'bold'}} 
-                variant='contained'
-                onClick={this.props.addChip.bind(this, info.Name, "Frozen", info.UnitPrice)}
-                size='large'>{info.Name}</Button>;
-        arr.push(thisButton);
+                if (info.Stock > 0) {
+                    var thisButton = <Button 
+                    style={{backgroundColor: "#42a5f5", color: '#faebd7', fontWeight: 'bold'}} 
+                    variant='contained'
+                    onClick={this.props.addChip.bind(this, info.Name, "Frozen", info.UnitPrice)}
+                    size='large'>{info.Name}</Button>;
+                    arr.push(thisButton);
+                }
     })
         this.setState({buttArr: arr});     
     })

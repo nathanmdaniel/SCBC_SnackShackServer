@@ -6,6 +6,7 @@ import NewBalanceInput from './Accounts/NewBalanceInput.js';
 import ExistingAccountInput from './Accounts/ExistingAccountInput.js';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
 const theme = createMuiTheme({
 	palette: {
@@ -28,18 +29,31 @@ class AccountsPage extends React.Component {
 					<ButtonAppBar/>
 				</div>
 				<Grid container justify='center' spacing={2} style={{padding: '50px'}}>
-					<Grid item sm={1}/>
+					<Grid item sm={3}/>
 					<Grid item sm={6} style={{minHeight: '200px'}}>
 						<Paper style={{padding:'50px'}}>
 							<NewAccountInput/>
 						</Paper>
 					</Grid>
-					<Grid item sm={1}/>
+					<Grid item sm={3}/>
+					<Grid item sm={3}/>
 					<Grid item sm={6} style={{minHeight: '200px'}}>
 						<Paper style={{padding:'50px'}}>
 							<ExistingAccountInput/>
 						</Paper>
 					</Grid>
+					<Grid item sm={3}/>
+					<Grid item sm={3}/>
+					<Grid item sm={6}>
+						<TextField
+							id="server-output"
+							multiline
+							rows={2}
+							fullWidth
+							variant="outlined"
+							/>
+					</Grid>
+					<Grid item sm={3}/>
 				</Grid>
                 </MuiThemeProvider>
             </div>

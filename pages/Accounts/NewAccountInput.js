@@ -34,8 +34,8 @@ class NewAccountInput extends React.Component {
             document.getElementById("newBalanceInput").value = "";
             return;
         }
-        // fetch('http://192.168.1.2:3001/NewAccount', {
-        fetch('http://localhost:3001/NewAccount', {
+        fetch('http://192.168.1.114:3001/NewAccount', {
+        // fetch('http://localhost:3001/NewAccount', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,6 +44,12 @@ class NewAccountInput extends React.Component {
                 name: this.state.name,
                 balance: this.state.total
             })
+        }).then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            var outputString = "Created account for \"" + myJson.name + "\" with balance $" + myJson.balance + "\n";
+            document.getElementById("server-output").value += outputString;
         }).catch((error) => {
             console.log(error);
         });

@@ -43,8 +43,8 @@ class ExistingAccountInput extends React.Component {
             document.getElementById("depositInput").value = "";
             return;
         }
-        // fetch('http://192.168.1.2:3001/CreditAccount', {
-        fetch('http://localhost:3001/CreditAccount', {
+        fetch('http://192.168.1.114:3001/CreditAccount', {
+        // fetch('http://localhost:3001/CreditAccount', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,6 +53,18 @@ class ExistingAccountInput extends React.Component {
                 name: this.state.curName,
                 amount: this.state.addAmount
             })
+        }).then(response => {
+            return response.json();
+        })
+        .then(myJson => {
+            var outputString = ""
+            if (myJson.success) {
+                outputString = "Successfully credited \"" + myJson.name + "\" $" + myJson.amount + "\n";
+            }
+            else {
+                outputString = "Failed to credited \"" + myJson.name + "\" $" + myJson.amount + "\n";
+            }
+            document.getElementById("server-output").value += outputString;
         }).catch((error) => {
             console.log(error);
         });
@@ -66,8 +78,8 @@ class ExistingAccountInput extends React.Component {
     }
 
     componentDidMount() {
-        // var url = 'http://192.168.1.2:3001/RecordsJson'
-        var url = 'http://localhost:3001/RecordsJson'
+        var url = 'http://192.168.1.114:3001/RecordsJson'
+        // var url = 'http://localhost:3001/RecordsJson'
         fetch(url).then(response => {
             return response.json();
         })

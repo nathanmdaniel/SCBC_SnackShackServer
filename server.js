@@ -1,5 +1,7 @@
 const express = require('express')
 const next = require('next')
+const fs = require('fs');
+
 const dev = process.env.NODE_ENV !== 'production'
 // Create the Express-Next App
 const app = next({ dev })
@@ -19,9 +21,13 @@ var recSheet = records.Sheets['Sheet1'];
 function chargeBalance(name, amount) {
     var balJson = XLSX.utils.sheet_to_json(recSheet);
     var found = false;
+    var cabin = 0;
+    var cohort = "unknown";
     balJson.forEach(account =>{
         if (name === account.Name) {
             found = true;
+            cabin = account.Cabin;
+            cohort = account.Cohort;
             account.Spent += amount;
             account.Balance -= amount;
         }
@@ -32,10 +38,16 @@ function chargeBalance(name, amount) {
 
     XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
 
-    return found;
+    // return found;
+    return {
+        found: found,
+        cabin: cabin,
+        cohort: cohort
+    };
 }
 
 function decrementInventories(transactionItems) {
+    var outOfStockArr = [];
     var merchJson = XLSX.utils.sheet_to_json(inventory.Sheets['Merchandise']);
     var snacksJson = XLSX.utils.sheet_to_json(inventory.Sheets['Snacks']);
     var drinksJson = XLSX.utils.sheet_to_json(inventory.Sheets['Drinks']);
@@ -59,6 +71,9 @@ function decrementInventories(transactionItems) {
         catJson.forEach(inventoryItem => {
             if (transactionItem.item === inventoryItem.Name) {
                 --inventoryItem.Stock;
+                if (inventoryItem.Stock < 0) {
+                    outOfStockArr.push(inventoryItem.Name);
+                }
             }
         })
     })
@@ -68,6 +83,7 @@ function decrementInventories(transactionItems) {
     inventory.Sheets['Frozen'] = XLSX.utils.json_to_sheet(frozenJson);
 
     XLSX.writeFile(inventory, 'Inventory.xlsx');
+    return outOfStockArr;
 }
 
 //Start the app
@@ -118,9 +134,20 @@ app.prepare()
 
     // Decrement Inventories & Account's Balance
     server.post('/DecInventories', (req, res) => {
-        const found = chargeBalance(req.body.name, req.body.price);
-        decrementInventories(req.body.items);
-        res.send({"found": found});
+        const camperInfo = chargeBalance(req.body.name, req.body.price);
+        const outOfStock = decrementInventories(req.body.items);
+        res.send({"found": camperInfo.found, "outOfStock": outOfStock});
+        var output = req.body.name + " (Cabin " + camperInfo.cabin + " " + camperInfo.cohort + ") - $" + req.body.price + " [ ";
+        req.body.items.forEach(i => {
+            output += i.item + ", "
+        })
+        output += "]\n";
+        console.log(output);
+        const out_filename = camperInfo.cohort + "_orders.txt";
+        fs.appendFile(out_filename, output, function (err) {
+            if (err) throw err;
+            // console.log('Success!');
+          });
         res.end();
         return res;
     })
@@ -132,7 +159,7 @@ app.prepare()
         records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
         recSheet = records.Sheets['Sheet1'];
         XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
-
+        res.send({"name": req.body.name, "balance": req.body.balance});
         res.end();
         return res;
     })
@@ -140,9 +167,10 @@ app.prepare()
     // Increase balance of account in CurrentWeekAccounts spreadsheet
     server.post('/CreditAccount', (req, res) => {
         var recJson = XLSX.utils.sheet_to_json(recSheet);
-        
+        var found = false;
         recJson.forEach(account => {
             if (req.body.name === account.Name) {
+                found = true;
                 account.Deposited += req.body.amount;
                 account.Balance += req.body.amount;
             }
@@ -151,14 +179,14 @@ app.prepare()
         records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
         recSheet = records.Sheets['Sheet1'];
         XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
-
+        res.send({"name": req.body.name, "amount": req.body.amount, "success": found});
         res.end();
         return res;
     })
 
     server.listen(3001, (err) => {
         if (err) throw err
-        console.log('> Ready on http://192.168.1.2:3001')
+        console.log('> Ready on http://192.168.1.114:3001')
     })
 })
 .catch((ex) => {

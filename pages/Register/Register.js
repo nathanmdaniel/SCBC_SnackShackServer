@@ -79,8 +79,8 @@ class Register extends React.Component {
 
     handleSendClick(customerName) {
         const cost = this.state.total;
-        // fetch('http://192.168.1.2:3001/DecInventories', {
-            fetch('http://localhost:3001/DecInventories', {
+        fetch('http://192.168.1.114:3001/DecInventories', {
+            // fetch('http://localhost:3001/DecInventories', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -100,6 +100,10 @@ class Register extends React.Component {
             }
             else {
                 outputString = "Failed to charge \"" + customerName + "\" $" + cost + "\n";
+            }
+            if (myJson.outOfStock.length > 0) {
+
+                document.getElementById("server-output").value += "WARNING! The following items appear to be out of stock: " + myJson.outOfStock.toString() + "\n";
             }
             document.getElementById("server-output").value += outputString;
         })
