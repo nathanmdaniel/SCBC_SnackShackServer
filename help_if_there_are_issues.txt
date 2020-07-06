@@ -1,0 +1,17 @@
+steps:
+- clear the order sheets (format is "<cohort name>_orders.txt"). Campers without a cohort listed are saved in "undefined_orders.txt".
+- close all spreadsheets ("Inventory.xlsx" and "CurrentWeekAccounts.xlsx") and "_orders.txt" files
+- double click the "runServer" batch file
+- if you see colored text that reads "compiling", you should be able to connect
+- currently, the address to connect is currently http://192.168.1.114:3001/RegisterPage. If that does not work, check to see if the IP address (all the numbers separated by periods before the colon) of the computer running the server matches.
+- as you submit orders, confirm that the dialog box reads a success. It is also possible that the server will respond with a "Warning" message, which is usually, when the last item may have been purchased. That is ok, just keep in mind that transaction may need a refund. Usually a button will disappear when it is out of stock
+
+
+handling errors:
+- if no success message is being printed, but buttons do not disappear when switching between tabs, it is likely that a spreadsheet or text file is open that must be closed
+- if buttons disappear, you are disconnected from the server. Check to see if it is still running
+- if a camper's name does not appear in autofill, the camper most likely does not have an account. To confirm, you can switch between the tabs (snack, drinks, etc.) and see if the buttons disappear. If they do disappear, you have disconnected.
+
+
+other issues:
+- if there is no account for a camper/counselor, first create an account for them with the balance of how much cash they gave (or 0 if they are allowed to go negative). When you return to the register
