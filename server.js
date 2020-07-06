@@ -37,6 +37,7 @@ function chargeBalance(name, amount) {
     recSheet = records.Sheets['Sheet1'];
 
     XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
+    
 
     // return found;
     return {
@@ -147,7 +148,7 @@ app.prepare()
         fs.appendFile(out_filename, output, function (err) {
             if (err) throw err;
             // console.log('Success!');
-          });
+        });
         res.end();
         return res;
     })
