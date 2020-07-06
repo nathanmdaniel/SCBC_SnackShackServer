@@ -16,7 +16,7 @@ import Grid from '@material-ui/core/Grid';
     componentDidMount() {
         var arr = [];
         var data = null;
-        var url = 'http://192.168.1.114:3001/FrozenJson'
+        var url = 'http://192.168.1.16:3001/FrozenJson'
         // var url = 'http://localhost:3001/FrozenJson'
         fetch(url).then(response => {
             return response.json();

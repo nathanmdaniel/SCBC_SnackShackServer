@@ -17,7 +17,7 @@ class SnackButtons extends React.Component {
     componentDidMount() {
         var arr = [];
         var data = null;
-        var url = 'http://192.168.1.114:3001/SnacksJson'
+        var url = 'http://192.168.1.16:3001/SnacksJson'
         // var url = 'http://localhost:3001/SnacksJson'
         fetch(url).then(response => {
             return response.json();
