@@ -33,8 +33,8 @@ class TransactionAccountLookup extends React.Component {
         return this.state.names;
     }
     readAccounts() {
-        var url = 'http://192.168.1.16:3001/RecordsJson'
-        // var url = 'http://localhost:3001/RecordsJson'
+        // var url = 'http://192.168.1.16:3001/RecordsJson'
+        var url = 'http://localhost:3001/RecordsJson'
         fetch(url).then(response => {
             return response.json();
         })
