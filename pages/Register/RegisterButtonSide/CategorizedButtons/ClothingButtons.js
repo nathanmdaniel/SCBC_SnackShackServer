@@ -32,6 +32,7 @@ class ClothingButtons extends React.Component {
                     style={{backgroundColor:"#8d6e63", color: '#faebd7', fontWeight: 'bold'}} 
                     variant='contained'
                     onClick={this.props.addChip.bind(this, info.Name, "Merchandise", info.UnitPrice)}
+                    key={info.Name}
                     size='large'>{info.Name}</Button>;
                     arr.push(thisButton);
                 }

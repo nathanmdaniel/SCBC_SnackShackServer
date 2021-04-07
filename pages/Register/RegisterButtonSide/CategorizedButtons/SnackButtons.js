@@ -30,6 +30,7 @@ class SnackButtons extends React.Component {
                     style={{backgroundColor: "#ec407a", color: '#faebd7', fontWeight: 'bold'}} 
                     variant='contained'
                     onClick={this.props.addChip.bind(this, info.Name, "Snacks", info.UnitPrice)}
+                    key={info.Name}
                     size='large'>{info.Name}</Button>;
                     arr.push(thisButton);
                 }
