@@ -41,6 +41,7 @@ class ClothingButtons extends React.Component {
     })
     .catch((error) => {
         console.error(error);
+        console.error("testing here")
     });
     }
 

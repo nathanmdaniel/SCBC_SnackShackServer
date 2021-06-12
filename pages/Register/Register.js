@@ -9,6 +9,7 @@ import TransactionCard from './RegisterTransactionSide/TransactionCard.js'
 import RegisterButtonContainer from './RegisterButtonSide/RegisterButtonContainer.js';
 import CheckoutChip from './RegisterTransactionSide/CheckoutChip.js';
 import TextField from '@material-ui/core/TextField';
+import StatusSnackbarHandler from './Popups/StatusSnackbarHandler.js';
 
 import Chip from '@material-ui/core/Chip';
 
@@ -44,7 +45,8 @@ class Register extends React.Component {
         items: [],
         total: 0,
         transactionNum: 0,
-        activeChipIndex: 0
+        activeChipIndex: 0,
+        snackbarData: ["Welcome!", "success"]
     };
 
     handleChipClick(chip) {
@@ -94,21 +96,26 @@ class Register extends React.Component {
             return response.json();
         })
         .then(myJson => {
-            var outputString = ""
+            var outputString = "";
             if (myJson.found) {
                 outputString = "Successfully charged \"" + customerName + "\" $" + cost + "\n";
+                this.setState({snackbarData: [outputString, "success"]});
             }
             else {
                 outputString = "Failed to charge \"" + customerName + "\" $" + cost + "\n";
+                this.setState({snackbarData: [outputString, "error"]});
             }
             if (myJson.outOfStock.length > 0) {
-
-                document.getElementById("server-output").value += "WARNING! The following items appear to be out of stock: " + myJson.outOfStock.toString() + "\n";
+                var warningString = "WARNING! The following items appear to be out of stock: " + myJson.outOfStock.toString();
+                document.getElementById("server-output").value += warningString + "\n";
+                this.setState({snackbarData: [warningString + " Successfully charged.", "warning"]});
             }
             document.getElementById("server-output").value += outputString;
         })
         .catch((error) => {
             console.log(error);
+            const errorString = "Error reading spreadsheet. Check if all spreadsheets are closed.";
+            this.setState({snackbarData: [errorString, "error"]});
         });
 
         //request({
@@ -168,6 +175,7 @@ class Register extends React.Component {
                         />
                 </Grid>
             </Grid>
+            <StatusSnackbarHandler key={this.state.transactionNum + "s_handler"} message={this.state.snackbarData[0]} alertType={this.state.snackbarData[1]}/>
           </div>
         );
             }

@@ -13,3 +13,21 @@ Locations to change ip_address:
 Known bug:
 -   dividing 2+ envelopes at the same time while 1 contains only 1 individual
     results in one box being left checked while the number of selected items is 0.
+-   if there is an error, the account balance will decrease even though the spreadsheet
+    has not. Discrepency. A later transaction will write the decreased amount. Inconsistent
+    charging. Check chargeBalance function in server.js
+
+TODO:
+Snackbars to add:
+- ERROR if failed to charge provided account name - DONE
+- ERROR if failed to decrement inventories - DONE
+- ERROR if failed to pull camper names - DONE
+- WARNING if connection lost 
+- WARNING if failed to recieve inventory lists - DONE
+- WARNING if item is out of stock - DONE
+- SUCCESS if transaction was written successfully - DONE
+
+- Add alert for transactions resulting in negative balance
+- Add js file defining constant for IP address
+
+- Add search bar to button area
