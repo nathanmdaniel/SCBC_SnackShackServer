@@ -82,7 +82,10 @@ class Register extends React.Component {
     handleSendClick(customerName) {
         const cost = this.state.total;
         // fetch('http://192.168.1.16:3001/DecInventories', {
-            fetch('http://localhost:3001/DecInventories', {
+        var CONSTANTS = require('../../Constants.js');
+        var url = CONSTANTS.IP_ADDR_CONST + 'DecInventories';
+            // fetch('http://localhost:3001/DecInventories', {
+        fetch( url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

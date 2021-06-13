@@ -14,27 +14,29 @@ import Grid from '@material-ui/core/Grid';
             };
         }
 
-            componentDidMount() {
-                var arr = [];
-                var data = null;
-                // var url = 'http://192.168.1.16:3001/DrinksJson'
-                var url = 'http://localhost:3001/DrinksJson'
-                fetch(url).then(response => {
-                    return response.json();
-                })
-                .then(myJson => {
-                    data = myJson;
-                    data.forEach(info =>{
-                        if (info.Stock > 0) {
-                            var thisButton = <Button 
-                            style={{backgroundColor: "#26a69a", color: '#faebd7', fontWeight: 'bold'}} 
-                            variant='contained'
-                            onClick={this.props.addChip.bind(this, info.Name, "Drinks", info.UnitPrice)}
-                            key={info.Name}
-                            size='large'>{info.Name}</Button>;
-                            arr.push(thisButton);
-                        }
+        componentDidMount() {
+            var arr = [];
+            var data = null;
+            // var url = 'http://192.168.1.16:3001/DrinksJson'
+            // var url = 'http://localhost:3001/DrinksJson'
+            var CONSTANTS = require('../../../../Constants.js');
+            var url = CONSTANTS.IP_ADDR_CONST + 'DrinksJson';
+            fetch(url).then(response => {
+                return response.json();
             })
+            .then(myJson => {
+                data = myJson;
+                data.forEach(info =>{
+                    if (info.Stock > 0) {
+                        var thisButton = <Button 
+                        style={{backgroundColor: "#26a69a", color: '#faebd7', fontWeight: 'bold'}} 
+                        variant='contained'
+                        onClick={this.props.addChip.bind(this, info.Name, "Drinks", info.UnitPrice)}
+                        key={info.Name}
+                        size='large'>{info.Name}</Button>;
+                        arr.push(thisButton);
+                    }
+        })
         this.setState({buttArr: arr});     
             })
     .catch((error) => {

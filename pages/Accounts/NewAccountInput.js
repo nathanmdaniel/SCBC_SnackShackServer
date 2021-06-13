@@ -34,8 +34,11 @@ class NewAccountInput extends React.Component {
             document.getElementById("newBalanceInput").value = "";
             return;
         }
+        var CONSTANTS = require('../../Constants.js');
+        var url = CONSTANTS.IP_ADDR_CONST + 'NewAccount';
         // fetch('http://192.168.1.16:3001/NewAccount', {
-        fetch('http://localhost:3001/NewAccount', {
+        // fetch('http://localhost:3001/NewAccount', {
+        fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
