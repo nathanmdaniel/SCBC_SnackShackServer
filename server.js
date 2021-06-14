@@ -187,7 +187,9 @@ app.prepare()
 
     server.listen(3001, (err) => {
         if (err) throw err
-        console.log('> Ready on http://192.168.1.16:3001')
+        var CONSTANTS = require('./Constants.js');
+        var url = CONSTANTS.IP_ADDR_CONST;
+        console.log('> Ready on ' + url)
     })
 })
 .catch((ex) => {
