@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import EnvelopeList from './CheckOut/EnvelopeList.js';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {SERVER_IP_ADDR} from '../Constants';
+import {SERVER_IP_ADDR} from '../Constants/index.js';
 
 const theme = createMuiTheme({
 	palette: {

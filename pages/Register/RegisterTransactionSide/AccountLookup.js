@@ -2,7 +2,7 @@ import React from 'react';
 import AutocompleteNames from '../../Accounts/AutocompleteNames.js';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import {SERVER_IP_ADDR} from '../../../Constants';
+import {SERVER_IP_ADDR} from '../../../Constants/index.js';
 
 class TransactionAccountLookup extends React.Component {
     constructor(props) {

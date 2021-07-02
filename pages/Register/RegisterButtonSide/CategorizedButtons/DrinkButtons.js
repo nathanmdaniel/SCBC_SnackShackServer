@@ -2,7 +2,7 @@ import React from 'react';
 import XLSX from 'xlsx';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import {SERVER_IP_ADDR} from '../../../../Constants';
+import {SERVER_IP_ADDR} from '../../../../Constants/index.js';
 
 
     class DrinkButtons extends React.Component {

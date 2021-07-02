@@ -10,7 +10,7 @@ import RegisterButtonContainer from './RegisterButtonSide/RegisterButtonContaine
 import CheckoutChip from './RegisterTransactionSide/CheckoutChip.js';
 import TextField from '@material-ui/core/TextField';
 import StatusSnackbarHandler from './Popups/StatusSnackbarHandler.js';
-import {SERVER_IP_ADDR} from '../../Constants';
+import {SERVER_IP_ADDR} from '../../Constants/index.js';
 
 import Chip from '@material-ui/core/Chip';
 
