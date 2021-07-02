@@ -28,6 +28,10 @@ Snackbars to add:
 - SUCCESS if transaction was written successfully - DONE
 
 - Add alert for transactions resulting in negative balance
-- Add js file defining constant for IP address
+- Add js file defining constant for IP address - DONE
 
 - Add search bar to button area
+- Add image link for shirts
+
+- Add timestamp to server.js for transactions
+- Add file write for cash deposits to/new accounts
