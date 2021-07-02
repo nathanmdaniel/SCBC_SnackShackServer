@@ -17,6 +17,8 @@ var records = XLSX.readFile('./CurrentWeekAccounts.xlsx');
 
 var recSheet = records.Sheets['Sheet1'];
 
+const CONSTANTS = require('./Constants/server_ip_const.js');
+
 
 function chargeBalance(name, amount) {
     var balJson = XLSX.utils.sheet_to_json(recSheet);
@@ -187,8 +189,7 @@ app.prepare()
 
     server.listen(3001, (err) => {
         if (err) throw err
-        var CONSTANTS = require('./Constants.js');
-        var url = CONSTANTS.IP_ADDR_CONST;
+        const url = CONSTANTS.IP_ADDR_CONST;
         console.log('> Ready on ' + url)
     })
 })

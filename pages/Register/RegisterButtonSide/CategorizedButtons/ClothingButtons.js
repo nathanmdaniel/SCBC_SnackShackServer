@@ -2,6 +2,7 @@ import React from 'react';
 import XLSX from 'xlsx';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import {SERVER_IP_ADDR} from '../../../../Constants';
 
 
 
@@ -21,8 +22,9 @@ class ClothingButtons extends React.Component {
         var data = null;
         // var url = 'http://192.168.1.16:3001/MerchJson'
         // var url = 'http://localhost:3001/MerchJson'
-        var CONSTANTS = require('../../../../Constants.js');
-        var url = CONSTANTS.IP_ADDR_CONST + 'MerchJson';
+        // var CONSTANTS = require('../../../../Constants/server_ip_const');
+        // var url = CONSTANTS.IP_ADDR_CONST + 'MerchJson';
+        var url = SERVER_IP_ADDR + 'MerchJson';
         fetch(url).then(response => {
             return response.json();
         })

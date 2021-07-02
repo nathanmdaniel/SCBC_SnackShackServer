@@ -10,6 +10,7 @@ import RegisterButtonContainer from './RegisterButtonSide/RegisterButtonContaine
 import CheckoutChip from './RegisterTransactionSide/CheckoutChip.js';
 import TextField from '@material-ui/core/TextField';
 import StatusSnackbarHandler from './Popups/StatusSnackbarHandler.js';
+import {SERVER_IP_ADDR} from '../../Constants';
 
 import Chip from '@material-ui/core/Chip';
 
@@ -82,8 +83,9 @@ class Register extends React.Component {
     handleSendClick(customerName) {
         const cost = this.state.total;
         // fetch('http://192.168.1.16:3001/DecInventories', {
-        var CONSTANTS = require('../../Constants.js');
-        var url = CONSTANTS.IP_ADDR_CONST + 'DecInventories';
+        // var CONSTANTS = require('../../Constants/server_ip_const.js');
+        // var url = CONSTANTS.IP_ADDR_CONST + 'DecInventories';
+        var url = SERVER_IP_ADDR + 'DecInventories';
             // fetch('http://localhost:3001/DecInventories', {
         fetch( url, {
             method: 'POST',

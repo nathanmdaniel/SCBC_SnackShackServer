@@ -2,6 +2,7 @@ import React from 'react';
 import XLSX from 'xlsx';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import {SERVER_IP_ADDR} from '../../../../Constants';
 
 
     class DrinkButtons extends React.Component {
@@ -19,8 +20,9 @@ import Grid from '@material-ui/core/Grid';
             var data = null;
             // var url = 'http://192.168.1.16:3001/DrinksJson'
             // var url = 'http://localhost:3001/DrinksJson'
-            var CONSTANTS = require('../../../../Constants.js');
-            var url = CONSTANTS.IP_ADDR_CONST + 'DrinksJson';
+            // var CONSTANTS = require('../../../../Constants/server_ip_const');
+            // var url = CONSTANTS.IP_ADDR_CONST + 'DrinksJson';
+            var url = SERVER_IP_ADDR + 'DrinksJson';
             fetch(url).then(response => {
                 return response.json();
             })

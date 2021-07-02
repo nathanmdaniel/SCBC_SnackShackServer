@@ -6,6 +6,7 @@ import AutocompleteNames from './AutocompleteNames.js';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import {SERVER_IP_ADDR} from '../../Constants';
 
 class ExistingAccountInput extends React.Component {
     constructor() {
@@ -43,8 +44,9 @@ class ExistingAccountInput extends React.Component {
             document.getElementById("depositInput").value = "";
             return;
         }
-        var CONSTANTS = require('../../Constants.js');
-        var update_url = CONSTANTS.IP_ADDR_CONST + 'CreditAccount';
+        // var CONSTANTS = require('../../Constants/server_ip_const.js');
+        // var update_url = CONSTANTS.IP_ADDR_CONST + 'CreditAccount';
+        var update_url = SERVER_IP_ADDR + 'CreditAccount';
         // fetch('http://192.168.1.16:3001/CreditAccount', {
         // fetch('http://localhost:3001/CreditAccount', {
         fetch(update_url, {
@@ -83,8 +85,9 @@ class ExistingAccountInput extends React.Component {
     componentDidMount() {
         // var url = 'http://192.168.1.16:3001/RecordsJson'
         // var url = 'http://localhost:3001/RecordsJson'
-        var CONSTANTS = require('../../Constants.js');
-        var url = CONSTANTS.IP_ADDR_CONST + 'RecordsJson';
+        // var CONSTANTS = require('../../Constants/server_ip_const.js');
+        // var url = CONSTANTS.IP_ADDR_CONST + 'RecordsJson';
+        var url = SERVER_IP_ADDR + 'RecordsJson';
         fetch(url).then(response => {
             return response.json();
         })

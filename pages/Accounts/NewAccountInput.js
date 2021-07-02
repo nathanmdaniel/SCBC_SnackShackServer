@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import {SERVER_IP_ADDR} from '../../Constants';
 
 class NewAccountInput extends React.Component {
     constructor() {
@@ -34,8 +35,9 @@ class NewAccountInput extends React.Component {
             document.getElementById("newBalanceInput").value = "";
             return;
         }
-        var CONSTANTS = require('../../Constants.js');
-        var url = CONSTANTS.IP_ADDR_CONST + 'NewAccount';
+        // var CONSTANTS = require('../../Constants/server_ip_const');
+        // var url = CONSTANTS.IP_ADDR_CONST + 'NewAccount';
+        var url = SERVER_IP_ADDR + 'NewAccount';
         // fetch('http://192.168.1.16:3001/NewAccount', {
         // fetch('http://localhost:3001/NewAccount', {
         fetch(url, {

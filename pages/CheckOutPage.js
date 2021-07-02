@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import EnvelopeList from './CheckOut/EnvelopeList.js';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {SERVER_IP_ADDR} from '../Constants';
 
 const theme = createMuiTheme({
 	palette: {
@@ -36,8 +37,9 @@ class CheckOutPage extends React.Component {
         // var url = 'http://192.168.1.16:3001/RecordsJson'
         // var url = 'http://192.168.1.21:3001/RecordsJson'
         // var url = 'http://localhost:3001/RecordsJson'
-        var CONSTANTS = require('../Constants.js');
-        var url = CONSTANTS.IP_ADDR_CONST + 'RecordsJson';
+        // var CONSTANTS = require('../Constants/server_ip_const.js');
+        // var url = CONSTANTS.IP_ADDR_CONST + 'RecordsJson';
+        var url = SERVER_IP_ADDR + 'RecordsJson';
         fetch(url).then(response => {
             return response.json();
         })
