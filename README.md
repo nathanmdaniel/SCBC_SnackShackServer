@@ -3,7 +3,16 @@
 Hello! Welcome to a quick guide to Sandy Creek Bible Camp's Snack Shack program.
 
 ## Setting Up
+### Setting Up Server for the First Time
+If you are setting up the server for the first time, follow the steps below:
+* Install Node.js (if you have not already)
+** Note that this requires a legacy version of Node for compatibility. v12.22.12
+* Install all dependencies of the application
+   ```
+   npm install
+   ```
 
+### Normal Setup
 The program supports entering transactions from multiple devices (phones, laptops, etc.). It does this by having all devices connecting to the "SnackShack" network. This network is not connected to the internet but is simply used to connect all the devices being used at a given time.
 
 1. Ensure router is plugged in and turned on
