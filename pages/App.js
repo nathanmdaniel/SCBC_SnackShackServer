@@ -3,11 +3,11 @@ import './App.css';
 import { withStyles } from '@material-ui/core/styles';
 import ButtonAppBar from './ButtonAppBar/ButtonAppBar.js';
 import AppBar from '@material-ui/core/AppBar';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import Register from './Register/Register.js';
 import Grid from '@material-ui/core/Grid';
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
         primary: {
             main: "#B5D565"
