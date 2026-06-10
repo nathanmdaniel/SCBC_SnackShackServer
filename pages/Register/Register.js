@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Tabs from './RegisterButtonSide/Tabs.js';
 import TransactionCard from './RegisterTransactionSide/TransactionCard.js'
 import RegisterButtonContainer from './RegisterButtonSide/RegisterButtonContainer.js';
+import { DEC_INVENTORIES_URL } from '../../config';
 import CheckoutChip from './RegisterTransactionSide/CheckoutChip.js';
 
 import Chip from '@material-ui/core/Chip';
@@ -77,7 +78,7 @@ class Register extends React.Component {
     }
 
     handleSendClick(customerName) {
-        fetch('http://192.168.1.2:3001/DecInventories', {
+        fetch(DEC_INVENTORIES_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

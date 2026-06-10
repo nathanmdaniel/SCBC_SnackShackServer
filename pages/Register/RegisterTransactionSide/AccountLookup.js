@@ -2,6 +2,7 @@ import React from 'react';
 import AutocompleteNames from '../../Accounts/AutocompleteNames.js';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { RECORDS_JSON_URL } from '../../../config';
 
 class TransactionAccountLookup extends React.Component {
     constructor(props) {
@@ -33,8 +34,7 @@ class TransactionAccountLookup extends React.Component {
         return this.state.names;
     }
     readAccounts() {
-        var url = 'http://192.168.1.2:3001/RecordsJson'
-        fetch(url).then(response => {
+        fetch(RECORDS_JSON_URL).then(response => {
             return response.json();
         })
         .then(myJson => {
