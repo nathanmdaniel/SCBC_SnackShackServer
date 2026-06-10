@@ -1,13 +1,13 @@
 import React from 'react';
 import ButtonAppBar from './ButtonAppBar/ButtonAppBar.js';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import NewAccountInput from './Accounts/NewAccountInput.js';
 import NewBalanceInput from './Accounts/NewBalanceInput.js';
 import ExistingAccountInput from './Accounts/ExistingAccountInput.js';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-const theme = createMuiTheme({
+const theme = createTheme({
 	palette: {
 		primary: {
 			main: "#B5D565"

@@ -1,7 +1,6 @@
 import React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { withTheme } from '@material-ui/core/styles';
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
