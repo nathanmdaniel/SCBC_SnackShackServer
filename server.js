@@ -4,6 +4,9 @@ const dev = process.env.NODE_ENV !== 'production'
 // Create the Express-Next App
 const app = next({ dev })
 const handle = app.getRequestHandler()
+const fs = require('fs');
+const path = require('path');
+const logFile = path.join(__dirname, 'transaction-log.txt');
 
 
 const bodyParser = require('body-parser');
@@ -16,19 +19,40 @@ var records = XLSX.readFile('./CurrentWeekAccounts.xlsx');
 var recSheet = records.Sheets['Sheet1'];
 
 
+function logTransaction(logEntry) {
+  const timestamp = new Date().toLocaleString('en-US', {
+    timeZone: 'America/Chicago',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+  const line = `${timestamp} CT | ${logEntry}\n`;
+  fs.appendFile(logFile, line, err => {
+    if (err) console.error('Failed to write transaction log:', err);
+  });
+}
+
 function chargeBalance(name, amount) {
+    var newBalance = null;
     var balJson = XLSX.utils.sheet_to_json(recSheet);
-    balJson.forEach(account =>{
+    for (const account of balJson) {
         if (name === account.Name) {
             account.Spent += amount;
             account.Balance -= amount;
+            newBalance = account.Balance;
+            break;
         }
-    })
+    }
 
     records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(balJson);
     recSheet = records.Sheets['Sheet1'];
 
     XLSX.writeFile(records, 'CurrentWeekAccounts.xlsx');
+    return newBalance;
 }
 
 function decrementInventories(transactionItems) {
@@ -114,14 +138,24 @@ app.prepare()
 
     // Decrement Inventories & Account's Balance
     server.post('/DecInventories', (req, res) => {
-        chargeBalance(req.body.name, req.body.price);
+        var newBalance = chargeBalance(req.body.name, req.body.price);
         decrementInventories(req.body.items);
+
+        if (newBalance !== null) {
+            logTransaction(`PURCHASE | name: ${req.body.name} | items: ${JSON.stringify(req.body.items)} | charged: ${req.body.price} | newBalance: ${newBalance}`);
+        }
+        else {
+            logTransaction(`PURCHASE FAILED | name: ${req.body.name} | items: ${JSON.stringify(req.body.items)} | charged: ${req.body.price}`);
+        }
+
         res.end();
         return res;
     })
 
     // Add account to CurrentWeekAccounts spreadsheet
     server.post('/NewAccount', (req, res) => {
+        // Log: { date; "ACCOUNT CREATED"; name: req.body.name, balance: req.body.balance }
+        logTransaction(`ACCOUNT CREATED | name: ${req.body.name} | balance: ${req.body.balance}`);
         var recJson = XLSX.utils.sheet_to_json(recSheet);
         recJson.push({ Name: req.body.name, Deposited: req.body.balance, Spent: 0, Balance: req.body.balance });
         records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
@@ -134,14 +168,24 @@ app.prepare()
 
     // Increase balance of account in CurrentWeekAccounts spreadsheet
     server.post('/CreditAccount', (req, res) => {
+        var newBalance = null;
         var recJson = XLSX.utils.sheet_to_json(recSheet);
         
-        recJson.forEach(account => {
+        for (const account of recJson) {
             if (req.body.name === account.Name) {
                 account.Deposited += req.body.amount;
                 account.Balance += req.body.amount;
+                newBalance = account.Balance;
+                break;
             }
-        })
+        }
+
+        if (newBalance !== null) {
+            logTransaction(`ACCOUNT CREDITED | name: ${req.body.name} | amountAdded: ${req.body.amount} | newBalance: ${newBalance}`);
+        }
+        else {
+            logTransaction(`FAILED TO CREDIT ACCOUNT | name: ${req.body.name} | amountAttemptedToAdd: ${req.body.amount}`);
+        }
 
         records.Sheets['Sheet1'] = XLSX.utils.json_to_sheet(recJson);
         recSheet = records.Sheets['Sheet1'];
