@@ -2,6 +2,7 @@ import React from 'react';
 import XLSX from 'xlsx';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import { MERCH_JSON_URL } from '../../../../config';
 
 
 
@@ -19,7 +20,7 @@ class ClothingButtons extends React.Component {
     componentDidMount() {
         var arr = [];
         var data = null;
-        var url = 'http://192.168.1.2:3001/MerchJson'
+        var url = MERCH_JSON_URL
         fetch(url).then(response => {
             return response.json();
         })

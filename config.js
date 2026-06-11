@@ -1,0 +1,10 @@
+export const API_BASE_URL = 'http://192.168.1.2:3001';
+// export const API_BASE_URL = 'http://localhost:3001';
+export const NEW_ACCOUNT_URL = `${API_BASE_URL}/NewAccount`;
+export const DEC_INVENTORIES_URL = `${API_BASE_URL}/DecInventories`;
+export const CREDIT_ACCOUNT_URL = `${API_BASE_URL}/CreditAccount`;
+export const RECORDS_JSON_URL = `${API_BASE_URL}/RecordsJson`;
+export const MERCH_JSON_URL = `${API_BASE_URL}/MerchJson`;
+export const DRINKS_JSON_URL = `${API_BASE_URL}/DrinksJson`;
+export const SNACKS_JSON_URL = `${API_BASE_URL}/SnacksJson`;
+export const FROZEN_JSON_URL = `${API_BASE_URL}/FrozenJson`;

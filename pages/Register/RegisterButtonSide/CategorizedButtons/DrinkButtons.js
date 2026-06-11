@@ -2,6 +2,7 @@ import React from 'react';
 import XLSX from 'xlsx';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { DRINKS_JSON_URL } from '../../../../config';
 
 
     class DrinkButtons extends React.Component {
@@ -17,7 +18,7 @@ import Grid from '@material-ui/core/Grid';
             componentDidMount() {
                 var arr = [];
                 var data = null;
-                var url = 'http://192.168.1.2:3001/DrinksJson'
+                var url = DRINKS_JSON_URL
                 fetch(url).then(response => {
                     return response.json();
                 })

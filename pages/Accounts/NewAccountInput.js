@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import { NEW_ACCOUNT_URL } from '../../config';
 
 class NewAccountInput extends React.Component {
     constructor() {
@@ -34,7 +35,7 @@ class NewAccountInput extends React.Component {
             document.getElementById("newBalanceInput").value = "";
             return;
         }
-        fetch('http://192.168.1.2:3001/NewAccount', {
+        fetch(NEW_ACCOUNT_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

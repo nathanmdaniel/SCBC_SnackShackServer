@@ -6,6 +6,7 @@ import AutocompleteNames from './AutocompleteNames.js';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import { CREDIT_ACCOUNT_URL, RECORDS_JSON_URL } from '../../config';
 
 class ExistingAccountInput extends React.Component {
     constructor() {
@@ -43,7 +44,7 @@ class ExistingAccountInput extends React.Component {
             document.getElementById("depositInput").value = "";
             return;
         }
-        fetch('http://192.168.1.2:3001/CreditAccount', {
+        fetch(CREDIT_ACCOUNT_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,7 +66,7 @@ class ExistingAccountInput extends React.Component {
     }
 
     componentDidMount() {
-        var url = 'http://192.168.1.2:3001/RecordsJson'
+        var url = RECORDS_JSON_URL
         fetch(url).then(response => {
             return response.json();
         })
